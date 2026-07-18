@@ -7,3 +7,16 @@ requires-python = ">=3.12"
 dependencies = [
     "requests>=2.34.2",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "network: tests that hit the live wiki API (excluded by default)",
+]
+addopts = "-m 'not network'"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "responses>=0.26.2",
+]
