@@ -1,0 +1,3234 @@
+{
+  "meta": {
+    "generated_at": "2026-07-18T16:50:09Z",
+    "input": "data/pages.jsonl",
+    "pages": 464,
+    "ns_counts": {
+      "0": 438,
+      "112": 26
+    },
+    "mwparserfromhell": "0.7.2"
+  },
+  "templates": {
+    "inventory": [
+      {
+        "name": "ref",
+        "pages": 225,
+        "occurrences": 843,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "quote",
+        "pages": 176,
+        "occurrences": 198,
+        "is_infobox": false,
+        "is_quote": true
+      },
+      {
+        "name": "reflist",
+        "pages": 195,
+        "occurrences": 195,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "needhelp",
+        "pages": 140,
+        "occurrences": 140,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "character infobox",
+        "pages": 92,
+        "occurrences": 92,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "pron",
+        "pages": 66,
+        "occurrences": 81,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "stub",
+        "pages": 62,
+        "occurrences": 62,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "university navbox",
+        "pages": 50,
+        "occurrences": 50,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Location infobox",
+        "pages": 40,
+        "occurrences": 40,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "Character",
+        "pages": 32,
+        "occurrences": 32,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Orphan",
+        "pages": 26,
+        "occurrences": 26,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Chapter infobox",
+        "pages": 25,
+        "occurrences": 25,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "series navbox",
+        "pages": 17,
+        "occurrences": 17,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "chapters navbox",
+        "pages": 14,
+        "occurrences": 14,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "object infobox",
+        "pages": 13,
+        "occurrences": 13,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "group infobox",
+        "pages": 12,
+        "occurrences": 12,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "book infobox",
+        "pages": 11,
+        "occurrences": 12,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "main",
+        "pages": 5,
+        "occurrences": 11,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "temerant navbox",
+        "pages": 7,
+        "occurrences": 7,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "disambig",
+        "pages": 6,
+        "occurrences": 6,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "conjecture",
+        "pages": 6,
+        "occurrences": 6,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "product infobox",
+        "pages": 5,
+        "occurrences": 5,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "song infobox",
+        "pages": 5,
+        "occurrences": 5,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "species infobox",
+        "pages": 5,
+        "occurrences": 5,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "clr",
+        "pages": 3,
+        "occurrences": 5,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "for",
+        "pages": 5,
+        "occurrences": 5,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Underlinked",
+        "pages": 4,
+        "occurrences": 4,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "map",
+        "pages": 4,
+        "occurrences": 4,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Person infobox",
+        "pages": 4,
+        "occurrences": 4,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "cite",
+        "pages": 3,
+        "occurrences": 4,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "youmay",
+        "pages": 3,
+        "occurrences": 3,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Occupation",
+        "pages": 3,
+        "occurrences": 3,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "wikipedia",
+        "pages": 2,
+        "occurrences": 2,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Game infobox",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "Play infobox",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": true,
+        "is_quote": false
+      },
+      {
+        "name": "Mainpage/Welcome",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Mainpage/Books",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Mainpage/Helpout",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "DiscordWidget",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Mainpage/Author",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Mainpage/Quote",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": true
+      },
+      {
+        "name": "Mainpage/Characters",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "w:FooterFantasyLit",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "Imagebox",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "DEFAULTSORT:Sephran",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      },
+      {
+        "name": "PAGENAME",
+        "pages": 1,
+        "occurrences": 1,
+        "is_infobox": false,
+        "is_quote": false
+      }
+    ],
+    "examples": [
+      {
+        "name": "ref",
+        "page": "A Quainte Compendium of Folke Belief",
+        "raw": "{{ref|TWMF|16|Author of ''A Quainte Compendium of Folke Belief''|Of the Chaendrian there is little to be said. Every Man knows of them. Every child chants their song. Yet folke tell no stories.<br>For the price of a small beer a Farmer will talk two hours on Dannerlings. But mention the Chaendrian and his mouth goes tight as a Spinner’s Asse and he is touching iron and pushing back his chair.<br>Many think it bad luck to speak of the Fae, yet still folke do. What makes the Chaendrian different I knowe notte. One rather drunk Tanner in the towne of Hillesborrow said in hushed tones, “If you talk of them, they come for you.” This seems the unspoken fear of these common folke.<br>So I write what I have gleaned, all common and inspecific. The Chaendrian are a groupe of various number. (Likely seven, given their name.) They appear and commit diverse violence for no clear reason.<br>There are signs which herald their Arrival, but there is no agreement as to these. Blue flame is the most common, but I have also heard of wine going sour, blindness, crops withering, unseasonable storms, miscarriage, and the sun going dark in the sky.<br>Altogether, I have found them a Frustrating and Profitless area of Inquirey.}}",
+        "stripped": ""
+      },
+      {
+        "name": "quote",
+        "page": "Cealdish Currency",
+        "raw": "{{Quote|Ages ago, barter was the most common method of trade. Some larger cities coined their own currency, but outside those cities the money was only worth the weight of the metal. Bars of metal were better for bartering, but inconvenient to carry.... [[Ceald|The Cealdim]] were the first to establish a standardized currency that was widely accepted. By cutting a bar of metal into pieces, you would get copper [[jot]]s. It was a great improvement on the previous system, and is still the most widely accepted currency in [[The Four Corners of Civilization|The Four Corners]] today.|Tillen Andra: The Road of Iron & Gold}}",
+        "stripped": ""
+      },
+      {
+        "name": "reflist",
+        "page": "Adaptations of The Kingkiller Chronicle",
+        "raw": "{{reflist|2}}",
+        "stripped": ""
+      },
+      {
+        "name": "needhelp",
+        "page": "Ademic",
+        "raw": "{{needhelp}}",
+        "stripped": ""
+      },
+      {
+        "name": "character infobox",
+        "page": "Ambrose Jakis",
+        "raw": "{{character infobox\n|image = Playing Cards poster Ambrose.jpg\n|fullname = Ambrose Jakis\n|species = Human\n|family = [[Baron Jakis]] (father)\nUnnamed sister\n\nDeceased unnamed mother\n|gender = Male\n|ethnicity = [[Vintas|Vintish]]\n|occupation = *University student\n*Scriv\n*Musician\n|field = \n|rank = [[Re'lar]]\n|instrument = Lyre|skin=Pale|hair=Brown|eye=Dark|residence=The Golden Pony}}",
+        "stripped": ""
+      },
+      {
+        "name": "pron",
+        "page": "Temic",
+        "raw": "{{pron|PR|/vɔɹ'feɪlən ɹɪn'ɑtə 'mɔreɪ/}}",
+        "stripped": ""
+      },
+      {
+        "name": "stub",
+        "page": "Advanced Mathematics",
+        "raw": "{{stub}}",
+        "stripped": ""
+      },
+      {
+        "name": "university navbox",
+        "page": "Advanced Mathematics",
+        "raw": "{{university navbox}}",
+        "stripped": ""
+      },
+      {
+        "name": "Location infobox",
+        "page": "Vintas",
+        "raw": "{{location infobox \n|name = Vintas\n|location = Eastern part of [[the Four Corners of Civilization]]\n|position = Sovereign state\n|government = Monarchy\n|ruler = King [[Roderic Calanthis]] and Queen Rinne Calanthis\n|currency = [[Currency of Vintas|Vintish currency]], [[Currency of Ceald|Cealdish currency]]\n|map = {{map|vin}}\n}}",
+        "stripped": ""
+      },
+      {
+        "name": "Character",
+        "page": "Kvothe",
+        "raw": "{{Character\n|image = The kingkiller chronicle kvothe by shilesque-d8m6yzz.jpg\n|fullname = Kvothe, Son of Arliden\n|alias = Kote<br>Reshi<br>Maedre<br>Red<br>Dulator<br>Shadicar<br>Lightfinger<br>Six-String<br>Kvothe the Bloodless<br>Kvothe the Arcane<br>Kvothe Kingkiller\n|family = *[[Arliden]] (father) †\n*[[Laurian]] (mother) †\n|fate = Alive\n|gender = Male\n|skin = Pale\n|age = Around 15-16 (In the past)\nMid 20s (In the present)\n|hair = Red\n|eye = Green\n|ethnicity = [[Edema Ruh]]\n|occupation = *University student (former)\n*Musician (former)\n*Innkeeper\n|field = Artificing, Medica, Naming, Sympathy, Arithmetic (skipped later) and learning [[Siaru]] language\n|rank = Re'lar\n|instrument = Lute\n|residence = * [[Tarbean]] (past)\n* [[The University]] (past)\n** [[Mews]] (past)\n** [[Horse and Four]] (past)\n** [[Anker's]] (past)\n* [[Waystone Inn]], [[Newarre]]}}",
+        "stripped": ""
+      },
+      {
+        "name": "Chapter infobox",
+        "page": "Chapter:A Place for Demons",
+        "raw": "{{chapter infobox\n|book = TNOTW\n|chapter = 2\n|arc = Frame story\n|location = [[Waystone Inn]]\n|previous = [[Chapter:A Silence of Three Parts (prologue of The Name of the Wind)|A Silence of Three Parts]]\n|next = [[Chapter:A Beautiful Day|A Beautiful Day]]\n}}",
+        "stripped": ""
+      },
+      {
+        "name": "object infobox",
+        "page": "Shaed",
+        "raw": "{{object infobox\n|image = 43a3cde4cefcdc363a4e725db9c7d9e0-d48rk7w.jpg\n|alias = The Shadow Cloak\n|type = Cloak\n|creator = [[Felurian]]\n|made = During Kvothe's stay in the Faen realm\n|usage = *Protects the wearer from harm\n*Provides camouflage in the dark\n|owner = [[Kvothe]]}}",
+        "stripped": ""
+      },
+      {
+        "name": "group infobox",
+        "page": "The Amyr",
+        "raw": "{{group infobox\n|alias = The Holy Order of Amyr\nCiridae\n|image = <gallery>\nPlaying Cards deck seal.jpg|Play-Seal\nPairs Commonwealth Amyr.jpg|Pairs-C\nAmyr ciridae.jpg|Fanart\n</gallery>\n|founder = [[Tehlinism|Tehlin Church]]<br>[[Selitos]] (myth version)\n|member = *Sir Savien Traliard\n*Atreyon\n|purpose = *Protection of [[the Aturan Empire]]\n*Guarding the Faith\n*Destruction of [[the Chandrian]] (myth version)\n*Avenging the destruction of [[Myr Tariniel]] (myth version)\n|status = Disbanded\n|name=|patron=|leader=}}",
+        "stripped": ""
+      },
+      {
+        "name": "book infobox",
+        "page": "The Adventures of the Princess and Mr. Whiffle",
+        "raw": "{{Book_infobox|image = Dark of deep below cover.jpg|name = The Adventures of the Princess and Mr. Whiffle: The Dark of Deep Below|author = Patrick Rothfuss (writer), Nate Taylor (illustrator)|country = United States|language = English|publisher = Subterranean Press|date = November 1st, 2013|type = Print (hardcover)|isbn = 978-1596066205|pages = 232|previous = The Adventures of the Princess and Mr. Whiffle: The Thing Beneath the Bed|next = None}}",
+        "stripped": ""
+      },
+      {
+        "name": "product infobox",
+        "page": "Pairs",
+        "raw": "{{product infobox\n|image = Pairs photo.jpg\n|product = Card game\n|designer = [[Wikipedia:James Ernest|James Ernest]], Paul Peterson\n|illustrator = Brett Bean, Echo Chernik, Phil Foglio, Kaja Foglio, John Kovalic, [[Nate Taylor]], Shane Tyree, Pete Venters, Cheyenne Wright\n|country = United States\n|producer = [[Wikipedia:Cheapass Games|Cheapass Games]]\n|date = October 20, 2014}}",
+        "stripped": ""
+      },
+      {
+        "name": "song infobox",
+        "page": "Chandrian (children's song)",
+        "raw": "{{Song infobox\n|name = Chandrian\n|alias = Chandrian, Chandrian\n|creator = Unknown\n|performer = Children\n|genre = Children's song}}",
+        "stripped": ""
+      },
+      {
+        "name": "species infobox",
+        "page": "Draccus",
+        "raw": "{{species infobox\n|image = Playing Cards poster Draccus.png\n|alias = Dragon\n|sentience = Sentient\n|mortality = Mortal\n|status = Mostly extinct\n|skin = Black scales}}",
+        "stripped": ""
+      },
+      {
+        "name": "Person infobox",
+        "page": "Patrick Rothfuss",
+        "raw": "{{person infobox\n|image = Patrick-rothfuss-0.jpg\n|fullname = Patrick James Rothfuss\n|alias = Pat\n|birthday = June 6, 1973\n|family = \n|gender = Male\n|nationality = American\n|occupation = *College lecturer (former)\n*Fiction author\n|website = [http://www.patrickrothfuss.com/ patrickrothfuss.com]}}",
+        "stripped": ""
+      },
+      {
+        "name": "Game infobox",
+        "page": "Chandrian (children's game)",
+        "raw": "{{Game infobox\n|name = Chandrian\n|genre = Children's game\n|creator = Unknown\n|players = Children\n}}",
+        "stripped": ""
+      },
+      {
+        "name": "Play infobox",
+        "page": "Daeonica",
+        "raw": "{{Play infobox\n|creator = Unknown\n|performers = [[Lord Greyfallow's Men]]\n|genre = Tragedy or Epic}}",
+        "stripped": ""
+      },
+      {
+        "name": "Mainpage/Quote",
+        "page": "Kingkiller Wiki",
+        "raw": "{{Mainpage/Quote}}",
+        "stripped": ""
+      }
+    ],
+    "ref_first_params": {
+      "TNOTW": 430,
+      "TWMF": 406,
+      "TLT": 6,
+      "TSROST": 1
+    }
+  },
+  "sections": {
+    "heading_inventory": [
+      {
+        "heading": "References",
+        "levels": {
+          "2": 206
+        },
+        "occurrences": 206,
+        "pages": 206,
+        "is_speculative": false
+      },
+      {
+        "heading": "Description",
+        "levels": {
+          "2": 166,
+          "3": 1
+        },
+        "occurrences": 167,
+        "pages": 167,
+        "is_speculative": false
+      },
+      {
+        "heading": "In The Chronicle",
+        "levels": {
+          "2": 148
+        },
+        "occurrences": 148,
+        "pages": 148,
+        "is_speculative": false
+      },
+      {
+        "heading": "Speculation",
+        "levels": {
+          "2": 70,
+          "3": 3
+        },
+        "occurrences": 73,
+        "pages": 72,
+        "is_speculative": true
+      },
+      {
+        "heading": "Trivia",
+        "levels": {
+          "2": 30,
+          "3": 1
+        },
+        "occurrences": 31,
+        "pages": 31,
+        "is_speculative": true
+      },
+      {
+        "heading": "Chapter summary",
+        "levels": {
+          "2": 26
+        },
+        "occurrences": 26,
+        "pages": 26,
+        "is_speculative": false
+      },
+      {
+        "heading": "TITLE",
+        "levels": {
+          "2": 19
+        },
+        "occurrences": 19,
+        "pages": 19,
+        "is_speculative": false
+      },
+      {
+        "heading": "CHARACTERS LIST",
+        "levels": {
+          "2": 16
+        },
+        "occurrences": 16,
+        "pages": 16,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fanarts",
+        "levels": {
+          "2": 10
+        },
+        "occurrences": 10,
+        "pages": 10,
+        "is_speculative": true
+      },
+      {
+        "heading": "Background and publication",
+        "levels": {
+          "2": 9
+        },
+        "occurrences": 9,
+        "pages": 9,
+        "is_speculative": false
+      },
+      {
+        "heading": "Current Master",
+        "levels": {
+          "2": 9
+        },
+        "occurrences": 9,
+        "pages": 9,
+        "is_speculative": false
+      },
+      {
+        "heading": "Speculations",
+        "levels": {
+          "2": 8
+        },
+        "occurrences": 8,
+        "pages": 8,
+        "is_speculative": true
+      },
+      {
+        "heading": "Plot summary",
+        "levels": {
+          "2": 8
+        },
+        "occurrences": 8,
+        "pages": 8,
+        "is_speculative": false
+      },
+      {
+        "heading": "Synopsis",
+        "levels": {
+          "3": 1,
+          "2": 6
+        },
+        "occurrences": 7,
+        "pages": 7,
+        "is_speculative": false
+      },
+      {
+        "heading": "The first silence",
+        "levels": {
+          "3": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "The second silence",
+        "levels": {
+          "3": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "The third silence",
+        "levels": {
+          "3": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known terms",
+        "levels": {
+          "2": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Lightning Tree",
+        "levels": {
+          "2": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "Reception",
+        "levels": {
+          "2": 6
+        },
+        "occurrences": 6,
+        "pages": 6,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fan arts",
+        "levels": {
+          "2": 5
+        },
+        "occurrences": 5,
+        "pages": 5,
+        "is_speculative": true
+      },
+      {
+        "heading": "Editions",
+        "levels": {
+          "2": 5
+        },
+        "occurrences": 5,
+        "pages": 5,
+        "is_speculative": false
+      },
+      {
+        "heading": "Appearance",
+        "levels": {
+          "2": 3,
+          "3": 1
+        },
+        "occurrences": 4,
+        "pages": 4,
+        "is_speculative": false
+      },
+      {
+        "heading": "In the Chronicles",
+        "levels": {
+          "2": 4
+        },
+        "occurrences": 4,
+        "pages": 4,
+        "is_speculative": false
+      },
+      {
+        "heading": "External links",
+        "levels": {
+          "2": 4
+        },
+        "occurrences": 4,
+        "pages": 4,
+        "is_speculative": false
+      },
+      {
+        "heading": "Geography",
+        "levels": {
+          "2": 2,
+          "3": 1
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Culture",
+        "levels": {
+          "2": 2,
+          "3": 1
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fan art",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": true
+      },
+      {
+        "heading": "Etymology",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "History",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Relationships",
+        "levels": {
+          "3": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Biography",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Career",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "References List",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "In the Story",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Character list",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": false
+      },
+      {
+        "heading": "Owners and Affiliates",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Drinks",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Origin",
+        "levels": {
+          "2": 1,
+          "3": 1
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "500 years before",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "In the Plot",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Works",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Real World References and Parallels",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Rules",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "See also",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Real-World References and Parallels",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Personal Life",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Other media",
+        "levels": {
+          "3": 1,
+          "2": 1
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Stories",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Awards and honors",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Card images",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Writing and structure",
+        "levels": {
+          "2": 2
+        },
+        "occurrences": 2,
+        "pages": 2,
+        "is_speculative": false
+      },
+      {
+        "heading": "Chapters",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Inspiration",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Twentieth Century Fox",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Production",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Lionsgate",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known gestures",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Origins",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Cultural Exports",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Elitism",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Communication",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Music",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Sexual beliefs and behavior",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Matriarchy",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notable figures",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Training in Alar",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Alchemical Products",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Named Angels",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Basic Principles",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Schema",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Significance",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Meta-knowledge",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Gifts",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Operation",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Slow Regard of Silent Things",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Quotations",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Year and months",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Days and spans",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Copper Jot",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Iron Drab",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Silver Talent",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Gold Mark",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Sets",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Background and production",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Chancellors",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Versions",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "In the Books",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Players",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Currency of Ceald",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Currency of Commonwealth",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Currency of Vintas",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Resource",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Creation War",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Taborlin stories",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Kingkiller Chronicle",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Structure",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Meeting Kvothe",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Eolian",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Trebon massacre",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Ring and Relationship with Ambrose",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Severen fall-out",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Personality",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Quotes about Denna",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fun Fact",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Translation process",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Issues in translation",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Culture and language",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Rhymes and acronyms",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Invented words and names",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Implication in texts",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "List of editions by country",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Isolation",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Role In Narrative",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notes and references",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Summary",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "List Of Appearances",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Ancient Mael language",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Glammourie",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Grammarie",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Combined Uses",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fanart",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Appearances in the books",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notable Persons",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Jax's Story",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Period of the Ergen Empire",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Period of the Aturan Empire",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Recent history",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Loeclos Box",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Lackless poem",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Jax",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notable Locations",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Prominent Residents",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notable Characteristics",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Broad Jurisdiction",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Close Connections to Tehlin Church",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Antagonism Towards Practice of Magic",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Archaic Methodology",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Split Enforcement",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Historical Significance",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Discipline",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Ketan movements",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Early life",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Tarbean",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The University",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Vintas",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Faen Realm",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Ademre",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Return to the University",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The present",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Other Names",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Kote",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Reshi",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Maedre",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Dulator",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Shadicar",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Lightfinger",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Six-String",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Kvothe the Bloodless",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Kvothe the Arcane",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Kvothe Kingkiller",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Naming",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Identity",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Rings",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Kvothe and Kote",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Significance to Kvothe",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "List of languages",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Unknown terms",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Tale of the Nine and Ninety Tales",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Way of the Lethani",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Entry into The Kingkiller Chronicle",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Film and TV Show",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Contents",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Members",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "From the Author",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Arcanist's Arts",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Fae magic",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Crossover-the Nature of Naming",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Rothfuss interview with Jo Walton",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Medicine within the Chronicle",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Medical Basis",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Medicine",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Gaps in Knowledge",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Areas",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Items",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Instruments",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Songs",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notable musicians",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Namers",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Denizens",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Quotes",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Decks",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Commonwealth deck",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Modegan deck",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Faen deck",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Temerant books",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Other books",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Spoilers about Book Three",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Family",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Background",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Book Three",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Archival scrivs",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Procurement Scrivs",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Scrivs",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Name of the Wind",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Possible Seven Word Combinations",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Transportation",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Making of the Shaed",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Properties of the Shaed",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Vocabulary",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Words",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Phrases",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Imperfect Aturan by Siaru speakers",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Grammar*",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Word order",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Zero prepositions",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Lists",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "List of songs",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Laws, Terms, and Maxims of Sympathy",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Bindings",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Setup",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Alternate rules",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Competitive Play",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Tak Media Content",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Background Information",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Images of Talent Pipes",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Known Establishments in Tarbean",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "His works",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Beliefs",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Practices",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Species",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Magic",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Plot Summary of The Thing Beneath the Bed",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Plot Summary of The Dark of Deep Below",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Importance to the Chronicle",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Human Amyr",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Myth Amyr",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Ranks",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Signs and Symbols",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Motivation",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Characters Known to Have Spoken with The Cthaeh",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Spoilers for The Doors of Stone",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Inhabitants",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The Folding House",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Plot description",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Works in the series",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Main trilogy",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Companion tales",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Editions and translations",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Derived works",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "TV series, Movie and Video Game",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Lyrics and form",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Notes",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Skarpi's Story",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Terms, Admissions, and Tuition",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Masters",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "In Hespe's story",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Background and General Information",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Patrick Rothfuss",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Wards",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Growing",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Sex",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Act",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Reproduction",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Place in the Story",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Abilities",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Involvement",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Social Rings",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Nobility",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Line of Succession",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Regulars",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Beverages",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "Food",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      },
+      {
+        "heading": "The loeclos Box",
+        "levels": {
+          "3": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": false
+      }
+    ],
+    "speculative_headings": [
+      {
+        "heading": "Speculation",
+        "levels": {
+          "2": 70,
+          "3": 3
+        },
+        "occurrences": 73,
+        "pages": 72,
+        "is_speculative": true
+      },
+      {
+        "heading": "Trivia",
+        "levels": {
+          "2": 30,
+          "3": 1
+        },
+        "occurrences": 31,
+        "pages": 31,
+        "is_speculative": true
+      },
+      {
+        "heading": "Fanarts",
+        "levels": {
+          "2": 10
+        },
+        "occurrences": 10,
+        "pages": 10,
+        "is_speculative": true
+      },
+      {
+        "heading": "Speculations",
+        "levels": {
+          "2": 8
+        },
+        "occurrences": 8,
+        "pages": 8,
+        "is_speculative": true
+      },
+      {
+        "heading": "Fan arts",
+        "levels": {
+          "2": 5
+        },
+        "occurrences": 5,
+        "pages": 5,
+        "is_speculative": true
+      },
+      {
+        "heading": "Fan art",
+        "levels": {
+          "2": 3
+        },
+        "occurrences": 3,
+        "pages": 3,
+        "is_speculative": true
+      },
+      {
+        "heading": "Fanart",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Spoilers about Book Three",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Book Three",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Possible Seven Word Combinations",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      },
+      {
+        "heading": "Spoilers for The Doors of Stone",
+        "levels": {
+          "2": 1
+        },
+        "occurrences": 1,
+        "pages": 1,
+        "is_speculative": true
+      }
+    ],
+    "speculative_pages_total": 108,
+    "section_words": {
+      "overall": {
+        "n": 1082,
+        "p50": 56,
+        "p90": 251,
+        "p99": 588,
+        "max": 2320,
+        "histogram": {
+          "0–50": 512,
+          "50–100": 199,
+          "100–230": 241,
+          "230–380": 103,
+          "380–500": 12,
+          "500–1000": 11,
+          "1000+": 4
+        }
+      },
+      "ns0": {
+        "n": 1003,
+        "p50": 58,
+        "p90": 251,
+        "p99": 571,
+        "max": 2320,
+        "histogram": {
+          "0–50": 461,
+          "50–100": 191,
+          "100–230": 230,
+          "230–380": 96,
+          "380–500": 12,
+          "500–1000": 9,
+          "1000+": 4
+        }
+      },
+      "ns112": {
+        "n": 79,
+        "p50": 30,
+        "p90": 259,
+        "p99": 852,
+        "max": 852,
+        "histogram": {
+          "0–50": 51,
+          "50–100": 8,
+          "100–230": 11,
+          "230–380": 7,
+          "380–500": 0,
+          "500–1000": 2,
+          "1000+": 0
+        }
+      }
+    },
+    "sections_over_split_threshold": 15,
+    "sections_under_tiny_threshold": 512,
+    "lede": {
+      "n": 464,
+      "p50": 26,
+      "p90": 118,
+      "p99": 293,
+      "max": 585,
+      "histogram": {
+        "0–50": 334,
+        "50–100": 69,
+        "100–230": 50,
+        "230–380": 8,
+        "380–500": 2,
+        "500–1000": 1,
+        "1000+": 0
+      }
+    },
+    "lede_only_pages": 127,
+    "lede_only_examples": [
+      "Advanced Mathematics",
+      "Alleg",
+      "Andan",
+      "Anisat",
+      "Anne",
+      "Arcanist",
+      "Arrand",
+      "Arthur Herma",
+      "Aturan Empire",
+      "Baedn-Bryt"
+    ]
+  },
+  "refs": {
+    "total_sections": 1546,
+    "sections_with_tag_ref_pct": 12.4,
+    "sections_with_tpl_ref_pct": 21.2,
+    "sections_with_any_ref": 461,
+    "sections_with_any_ref_pct": 29.8,
+    "refs_per_section_histogram": {
+      "0–1": 1085,
+      "1–2": 240,
+      "2–3": 89,
+      "3–6": 88,
+      "6–11": 29,
+      "11+": 15
+    },
+    "refs_per_section": {
+      "n": 1546,
+      "p50": 0,
+      "p90": 2,
+      "p99": 10,
+      "max": 68
+    },
+    "ref_contents_total": 364,
+    "ref_contents_survived_strip": 363,
+    "tag_ref_contents_survive": true,
+    "example": {
+      "page": "Abbott's Ford",
+      "raw": "<ref name=\":0\">''The Name of the Wind'', Chapter 4: \"Halfway to Newarre\"</ref>",
+      "stripped_result": "The Name of the Wind, Chapter 4: \"Halfway to Newarre\""
+    }
+  },
+  "garbage": {
+    "pages_with_residue": 5,
+    "worst": [
+      {
+        "title": "Chandrian (children's song)",
+        "ns": 0,
+        "residue_count": 10,
+        "excerpt": "\"ages old\" and provides the names of the Chandrian and their signs.\n\n Versions \n{| width=\"100%\"\n| width=\"50%\"|Children's version\nWhen the hearthfire turns to blue,\nWhat to do? What to do?\nRun outside. Run and hide.\n\nWhen his eyes are black "
+      },
+      {
+        "title": "Maple, Maypole",
+        "ns": 0,
+        "residue_count": 5,
+        "excerpt": " couplet of the rhyme is the chosen item.\n\nThere are two versions of the rhyme:\n{| width=\"55%\"\n|-\n|Waystone version\n\nMaple. Maypole.\nCatch and carry.\nAsh and Ember.\nElderberry.\n\nWoolen. Woman.\nMoon at night.\nWillow. Window.\nCandlelight.\n\nBa"
+      },
+      {
+        "title": "Lackless poem",
+        "ns": 0,
+        "residue_count": 4,
+        "excerpt": " at least two versions of the rhyme known in the Four Corners of Civilization.\n\n{| width=\"100%\"\n| width=\"50%\"|Girl's version\nSeven things has Lady Lackless\nKeeps them underneath her black dress\nOne a ring that's not for wearing\nOne a sharp "
+      },
+      {
+        "title": "Tinker Tanner",
+        "ns": 0,
+        "residue_count": 4,
+        "excerpt": "w verse to Kvothe who was on his way back to Severen from the Pennysworth Inn.\n\n{| width=\"100%\"\n|Young boy's verse:\nI once saw a fair farmer's daughter\nOn the riverbank far from all men\nShe was taking a bath when I saw her\nSaid she didn't f"
+      },
+      {
+        "title": "Viari",
+        "ns": 0,
+        "residue_count": 2,
+        "excerpt": "le-plays a character named Viari (whose appearance is based on Kvothe's) in the [[w:c:pennyarcade:List of D&D Podcasts|Penny Arcade'''s live Dungeons & Dragons games]] (also known as Acquisitions Inc.'') from season 7 onward.\n\nCategory:Scri"
+      }
+    ],
+    "near_empty": [
+      {
+        "title": "Kingkiller Wiki",
+        "ns": 0,
+        "wikitext_chars": 525,
+        "stripped_words": 16
+      },
+      {
+        "title": "Evesdown",
+        "ns": 0,
+        "wikitext_chars": 310,
+        "stripped_words": 19
+      }
+    ],
+    "category_leak_pages": 455
+  },
+  "implications": [
+    "Infobox templates — {{character infobox}} (92 pages), {{Location infobox}} (40 pages), {{Chapter infobox}} (25 pages), {{object infobox}} (13 pages), {{group infobox}} (12 pages), {{book infobox}} (11 pages), {{product infobox}} (5 pages), {{song infobox}} (5 pages), {{species infobox}} (5 pages), {{Person infobox}} (4 pages), {{Game infobox}} (1 pages), {{Play infobox}} (1 pages) — strip to nothing with strip_code(), so their structured params (incl. `|book=` on chapter pages) are lost unless extracted BEFORE stripping. Decision to confirm: drop infoboxes from chunk text, harvest their params into chunk metadata in a pre-strip pass.",
+    "{{quote}} (176 pages, 198 uses) is stripped ENTIRELY — quote text is silently lost. Decision to confirm: extract quote text + attribution from the template params pre-strip and inline them as regular prose.",
+    "Only 15 of 1082 sections (1.4%) exceed 500 words → max-size splitting is a rare fallback, not the main mechanism; section-aware chunking fits this corpus.",
+    "512 sections (47.3%) are under 50 words → confirms the tiny-section policy (keep as-is) matters; consider prepending page title + heading to every chunk so tiny chunks stay self-describing.",
+    "The lede (p50 26 words, p90 118) is a de-facto section, and 127 pages are lede-only → the chunker must treat pre-heading text as a first-class section.",
+    "Speculative-content headings found: \"Speculation\" (72p), \"Trivia\" (31p), \"Fanarts\" (10p), \"Speculations\" (8p), \"Fan arts\" (5p), \"Fan art\" (3p), \"Fanart\" (1p), \"Spoilers about Book Three\" (1p), \"Book Three\" (1p), \"Possible Seven Word Combinations\" (1p), \"Spoilers for The Doors of Stone\" (1p) — 108 pages total. Decision to confirm: is_speculation flag on chunks from these sections (case-insensitive match).",
+    "<ref> tag contents SURVIVE strip_code() (363/364 ref bodies remain, often as bare URLs inlined mid-sentence) → remove ref tags pre-strip, harvesting their book signals first.",
+    "The dominant citation mechanism is the {{ref}} TEMPLATE, whose first param is a closed book-code vocabulary (TNOTW×430, TWMF×406, TLT×6, TSROST×1) — dropped by strip_code, so harvest it pre-strip. 29.8% of sections carry ≥1 citation (tag or template; tags alone 12.4%) → section-level ref-to-chunk association is feasible for that slice.",
+    "[[Category:…]] links survive strip_code() as literal “Category:X” text on 455 pages → remove category links pre-strip and harvest them as chunk metadata (they are the planned retrieval-filter facets).",
+    "2 pages strip to <20 words despite non-trivial wikitext (pure-infobox pages) → apply a minimum stripped-length filter before chunking (consistent with the gold-seed skeleton filtering in the dataset notes).",
+    "5 pages leave markup residue after strip_code (tables, bare params, comments) → add a residue-cleanup regex pass after stripping; re-run this garbage watch to verify."
+  ],
+  "thresholds": {
+    "split_words": 500,
+    "tiny_words": 50,
+    "near_empty_words": 20
+  }
+}
