@@ -71,6 +71,10 @@ and want things explained using only book-1 knowledge."
 
 ## 4. Labeling pipeline
 
+> **Update 2026-07-18:** the `{{ref}}` TEMPLATE (225 pages / 843 uses, closed
+> vocab incl. side-story codes TLT/TSROST) is the dominant citation mechanism
+> and supersedes the `<ref>`-tag tier sizing below — see D11 + reports/exploration.md.
+
 Signal reliability, measured (share of text volume):
 
 | Signal | Coverage | Verdict |
