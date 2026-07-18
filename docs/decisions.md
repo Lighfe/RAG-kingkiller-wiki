@@ -76,3 +76,12 @@ shown). Small-n caveat reported with results.
 (pages.jsonl → chunks.jsonl → chunks_labeled.jsonl), each gitignored,
 each with a run manifest.** Stages inspectable and independently
 re-runnable; labeling experiments run against a frozen chunk set.
+
+**D15 · 2026-07-19 · Maintenance banners ({{orphan}}, {{underlinked}})
+match structural infobox detection; date param added to skipped set so
+they emit no chunk.** Logged as detections, not silently dropped.
+
+**D16 · 2026-07-19 · Single paragraphs > 380 words (6 chunks, max
+1,109w) stay unsplit; paragraph is the smallest split unit.** Worst
+cases are lists; arbitrary sub-paragraph cuts help nothing. Revisit at
+retrieval eval if these chunks misbehave.
