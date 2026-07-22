@@ -101,3 +101,17 @@ spoiler leakage and hallucination are the same failure channel
 user-facing groundedness contract alongside CC BY-SA attribution.
 Writeup reports "grounded, measured at X%", never "doesn't
 hallucinate".
+
+**D18 · 2026-07-22 · Infobox spoiler judgment: static facts (region,
+government type, currency, species) never escalate book_level;
+relational facts (e.g. ruler/affiliation) escalate only if the
+pairing itself is a story disclosure, not background lore.** Informs
+the LLM labeler prompt and the manual-labeling guide.
+
+**D19 · 2026-07-22 · Bare book-title mentions unconnected to any
+claim (e.g. plain-text "References" sections without templates) do
+not escalate book_level — reinforces D11's mentions-aren't-labels for
+a shape the harvester doesn't catch.** Chunker NOT patched to filter
+these (would invalidate the frozen sample); handled in the labeler
+prompt instead. Revisit as a retrieval-quality filter if eval shows
+them as noise.

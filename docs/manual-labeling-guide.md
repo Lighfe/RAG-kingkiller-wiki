@@ -37,6 +37,26 @@ separately, so an honest "u" beats a coin flip.
   nothing book-2 is revealed. Mention ≠ reveal — this is the trap the
   labeler exists to catch.
 
+## Infobox and reference-section edge cases (D18, D19)
+
+- *(Severen-shape, invented)* An infobox reads `location: Vintas`,
+  `position: City`, `currency: Vintish, Cealdish`, `ruler: Maer
+  Alveron; King Roderic Calanthis`. → **1** (assuming the page itself
+  is otherwise book-1): the geography/government/currency fields are
+  static background lore. `ruler` is a relational field, but naming
+  who rules a city is civic structure, not a story disclosure — it
+  doesn't reveal a plot event. Contrast with a field that pairs two
+  entities *because of what happens between them* (e.g. a character's
+  infobox listing a book-2-only ally gained through a book-2 event) —
+  that pairing would escalate.
+- *(Four-plate-door-shape, invented)* A page's `References` section
+  (no `{{ref}}` template, no citation) is just the plain-text lines
+  *"The Name of the Wind"* / *"The Wise Man's Fear"*. → **1**: these
+  are bare title mentions with no attached claim — nothing is
+  revealed, so nothing escalates (D19). Also applies to interwiki-link
+  debris in the same shape (e.g. `es:Imre`) — not a book reference at
+  all, and never a label signal.
+
 ## Mechanics
 
 Keys: `1` / `2` / `3` = level · `u` = unsure · `b` = back (redo
