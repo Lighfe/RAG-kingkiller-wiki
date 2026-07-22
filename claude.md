@@ -17,3 +17,5 @@ readable by a reviewer with no course context.
 - Tests with pytest; network-dependent tests behind a marker, excluded
   by default.
 - Read docs/dataset-notes.md before touching ingestion code.
+- Read docs/decisions/index.md before revisiting a decision — it may
+  already be settled (and why) across pipeline.md/labeling.md/evaluation.md.

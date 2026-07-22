@@ -8,8 +8,8 @@ the conservative default (D12) before writing.
 
 Run: ``uv run python -m ingest.label_llm --dry-run`` (cost estimate,
 no API calls) or ``uv run python -m ingest.label_llm --chunks N``
-(small live run). See docs/decisions.md D13 for the acceptance gate
-that must pass before a full (--chunks omitted, no --dry-run) run.
+(small live run). See docs/decisions/pipeline.md D13 for the acceptance
+gate that must pass before a full (--chunks omitted, no --dry-run) run.
 """
 
 from __future__ import annotations

@@ -4,7 +4,8 @@ Knowledge file for the LLM Zoomcamp capstone (RAG-kingkiller-wiki).
 Status: dataset decisions settled, backed by the label-signal audit
 (`scripts/label_audit.py`, run 2026-07-17 against the live wiki).
 Supersedes all Coppermind-era assumptions — update the project
-instructions accordingly.
+instructions accordingly. Settled decisions are logged in
+docs/decisions/index.md (split by topic: pipeline/labeling/evaluation).
 
 ## 1. Source & licensing
 
