@@ -13,6 +13,7 @@ from ingest.validate_labeler import (
     accuracy,
     book2_recall,
     confusion_matrix,
+    d24_exclusion_category,
     disagreements,
     gold_chunks,
     load_manual_labels,
@@ -101,3 +102,34 @@ def test_load_manual_labels_last_record_wins(tmp_path):
     labels = load_manual_labels(path)
     assert labels["x"]["manual_book_level"] == 2
     assert labels["y"]["manual_book_level"] == "u"
+
+
+# -- D24 exclusion category ---------------------------------------------------
+
+
+def test_d24_excludes_infobox_chunks():
+    assert d24_exclusion_category({"chunk_type": "infobox", "section_heading": ""}) == "infobox"
+
+
+@pytest.mark.parametrize(
+    "heading",
+    [
+        "Chapter summary > The first silence",
+        "Chapter summary > The second silence",
+        "Chapter summary > The third silence",
+        "THE FIRST SILENCE",  # case-insensitive
+    ],
+)
+def test_d24_excludes_silence_headings(heading):
+    assert d24_exclusion_category({"chunk_type": "prose", "section_heading": heading}) == "silence-heading"
+
+
+@pytest.mark.parametrize(
+    "heading",
+    ["Title", "TITLE", "Chapter summary", "Characters list", ""],
+)
+def test_d24_does_not_exclude_other_headings(heading):
+    # "Title" was checked empirically (2026-07-22) and rejected as a category:
+    # most instances state a specific chapter-content claim, so it stays in
+    # the denominator rather than being auto-excluded.
+    assert d24_exclusion_category({"chunk_type": "prose", "section_heading": heading}) is None

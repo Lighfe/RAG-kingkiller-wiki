@@ -99,13 +99,14 @@ mandatory page-title/section-heading prefix (D04) discloses the
 entity's existence via any chunk, regardless of content genre.
 
 **D27 · 2026-07-22 · Manual ground-truth corrections to
-data/manual_labels.jsonl: 8 adversarial labels revised after model-
+data/manual_labels.jsonl: 9 adversarial labels revised after model-
 disagreement review surfaced reasoning gaps in the original blind
 labeling.** 2151/3037/4502 (Maer/Tinuë/Severen — Book-1-reachable
 background geography, Severen-shape per D18/D21); 2230:in-the-
 chronicle-the-university:6 (fall-term content is genuinely Book 2,
-originally missed); 2267/2349/2454/2458 (University-arc characters
-correctly Book-2-introduced, originally under-labeled). Each
+originally missed); 2267/2349/2454/2456/2458 (University-arc characters
+correctly Book-2-introduced, originally under-labeled — 2456/Inyssa
+attends Elodin's lessons with Kvothe, a Book-2 setting). Each
 correction carries an independent reason, not model agreement alone —
 noted here since post-hoc ground-truth revision after seeing model
 output carries inherent confirmation-bias risk even when well-reasoned.

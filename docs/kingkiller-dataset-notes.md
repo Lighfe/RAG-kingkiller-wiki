@@ -124,6 +124,16 @@ Rejected approaches, kept for the writeup:
 - Validation protocol: LLM labeler is judged against gold + adversarial
   sets *before* its labels are trusted; chapter pages are never both
   trainer and judge.
+- **Gold chunks never reach the LLM labeler in production** — they're
+  already deterministically labeled at chunk-build time via the chapter
+  `|book=` cascade (D11). Validation re-derives them blind purely to
+  test judgment quality on a known-answer set; a subset can't
+  meaningfully test that judgment at all and is excluded from the
+  accuracy denominator (D24): structural infobox fields, which leak the
+  raw book code verbatim, and a handful of purely atmospheric
+  sub-headings. The rest still serves as the best available proxy for
+  how the labeler will perform on the null-provenance tier it actually
+  labels in production.
 
 ## 6. Ingestion gotchas (hard-won)
 
@@ -146,10 +156,12 @@ Rejected approaches, kept for the writeup:
 
 ## 7. Open questions (deliberately not settled here)
 
-- Chunking strategy (section-aware vs fixed-size; how infobox and
-  quote templates are handled in explaintext).
+- ~~Chunking strategy~~ **Resolved: section-aware, D02–D10 (task 3).**
 - Embedding model (OpenAI vs sentence-transformers) — decide with the
   retrieval eval, not before it.
 - The evaluation question set for retrieval + end-to-end QA (separate
   from the spoiler-leakage set).
-- Whether ns-2900 Map pages contain anything worth keeping (assumed no).
+- ~~Whether ns-2900 Map pages contain anything worth keeping~~
+  **Resolved: out of scope by construction.** `fetch_pages.py` only
+  enumerates namespaces 0 and 112 (D01); ns-2900 is never fetched, so
+  there's nothing to decide.

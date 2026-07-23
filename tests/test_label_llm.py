@@ -7,6 +7,7 @@ from pydantic import ValidationError
 
 from ingest.label_llm import (
     LabelResult,
+    actual_cost,
     apply_conservative_default,
     build_user_message,
     chunk_content,
@@ -27,9 +28,22 @@ CHUNK = {
 }
 
 
+class FakeUsageDetails:
+    def __init__(self, cached_tokens):
+        self.cached_tokens = cached_tokens
+
+
+class FakeUsage:
+    def __init__(self, input_tokens=1000, cached_tokens=0, output_tokens=50):
+        self.input_tokens = input_tokens
+        self.output_tokens = output_tokens
+        self.input_tokens_details = FakeUsageDetails(cached_tokens)
+
+
 class FakeResponse:
-    def __init__(self, parsed):
+    def __init__(self, parsed, usage=None):
         self.output_parsed = parsed
+        self.usage = usage if usage is not None else FakeUsage()
 
 
 class FakeResponsesClient:
@@ -44,6 +58,8 @@ class FakeResponsesClient:
         item = self._queue.pop(0)
         if isinstance(item, Exception):
             raise item
+        if isinstance(item, FakeResponse):
+            return item
         return FakeResponse(item)
 
 
@@ -194,6 +210,45 @@ def test_label_chunk_gives_up_after_max_retries():
     with pytest.raises(RuntimeError):
         label_chunk(client, CHUNK)
     assert len(client.responses.calls) == 3
+
+
+def test_label_chunk_records_usage_from_response():
+    raw = LabelResult(book_level=1, confidence="high", rationale="x")
+    usage = FakeUsage(input_tokens=1500, cached_tokens=1200, output_tokens=40)
+    client = FakeClient([FakeResponse(raw, usage=usage)])
+
+    record = label_chunk(client, CHUNK)
+
+    assert record["input_tokens"] == 1500
+    assert record["cached_tokens"] == 1200
+    assert record["output_tokens"] == 40
+
+
+# -- real cost from observed usage --------------------------------------------
+
+
+def test_actual_cost_applies_cached_discount_only_to_cached_tokens():
+    records = [
+        {"input_tokens": 1000, "cached_tokens": 800, "output_tokens": 50},
+        {"input_tokens": 1000, "cached_tokens": 0, "output_tokens": 50},
+    ]
+    cost = actual_cost(records)
+    assert cost["chunks"] == 2
+    assert cost["input_tokens"] == 2000
+    assert cost["cached_tokens"] == 800
+    assert cost["cache_hit_rate"] == pytest.approx(0.4)
+    expected = (
+        1200 / 1_000_000 * 0.75  # uncached input
+        + 800 / 1_000_000 * 0.075  # cached input
+        + 100 / 1_000_000 * 4.50  # output
+    )
+    assert cost["cost_usd"] == pytest.approx(expected, abs=5e-5)  # rounded to 4dp
+
+
+def test_actual_cost_empty_records_is_free_not_a_crash():
+    cost = actual_cost([])
+    assert cost["cache_hit_rate"] == 0.0
+    assert cost["cost_usd"] == 0.0
 
 
 # -- dry-run cost estimate (no API calls) ------------------------------------

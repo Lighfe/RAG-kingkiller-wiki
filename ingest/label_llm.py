@@ -37,6 +37,12 @@ TOOL_VERSION = "0.1"
 # Re-check both before trusting a cost estimate for real spend.
 PRICE_PER_1M_INPUT = 0.75
 PRICE_PER_1M_OUTPUT = 4.50
+# Cached-input rate for repeated prompt prefixes (our INSTRUCTIONS block is
+# byte-identical across every call) - a 90% discount off PRICE_PER_1M_INPUT,
+# same source/date as above. Whether this is actually realized depends on
+# provider-side caching behavior; label_chunk() logs response.usage so real
+# cache hit rate can be measured rather than assumed.
+PRICE_PER_1M_CACHED_INPUT = 0.075
 TOKENIZER_ENCODING = "o200k_base"
 
 # A structured {book_level, confidence, rationale} reply: a few JSON-shape
@@ -51,9 +57,12 @@ log = logging.getLogger(__name__)
 
 
 class LabelResult(BaseModel):
+    # Field order is generation order (D28): rationale first, so book_level
+    # and confidence are constrained to follow from reasoning already
+    # committed to, rather than a label chosen first and rationalized after.
+    rationale: str
     book_level: Literal[1, 2, 3]
     confidence: Literal["low", "medium", "high"]
-    rationale: str
 
 
 INSTRUCTIONS = """You are labeling short excerpts from a Kingkiller Chronicle \
@@ -77,15 +86,69 @@ content - level 2.
 that is just the plain text "The Name of the Wind" / "The Wise Man's Fear", \
 or an interwiki-link line like "es:Imre") is not a claim about content and \
 never escalates the level on its own.
+  - Contrast that with direct self-identification: a chunk stating that ITS \
+OWN content belongs to a specific book (e.g. "Elderberry is the hundred \
+fifty-second and last numbered chapter of the novel The Wise Man's Fear") \
+functions as a citation-equivalent signal and DOES escalate to that book's \
+level - the book title is naming the direct source of the specific claim \
+the chunk is making about itself, unlike an untethered reference list. This \
+applies to any content, not just chapter pages.
 
-Infobox chunks (structured "key: value" lines):
-  - Static facts - region, government type, currency, species, and similar \
-background-lore fields - never escalate book_level by themselves.
-  - Relational facts (e.g. ruler, affiliation, family) escalate ONLY if the \
-pairing itself is a story disclosure (something that happens in the plot), \
-not if it is just background civic or genealogical structure. Example: a \
-city's infobox naming its ruler is background lore, not a disclosure, even \
-if the character only visits that city in a later book.
+Frame story: the present-day frame narration (Kote/Bast/Chronicler at the \
+Waystone Inn) runs through all three books - it is not itself a Doors of \
+Stone signal. Judge frame-story chunks the same way as any other: by what \
+backstory or plot content they actually disclose, not by the presence of \
+the frame device. A frame scene that discloses nothing beyond established \
+background is level 1, however "present-day" or "prologue-flavored" it \
+reads. This includes frame-story SUSPENSE, not just frame-story presence: \
+unresolved mystery, foreboding, and things-left-unexplained are a core \
+device running through Books 1 and 2, not a signal of unpublished \
+material. Book level 3 should be grounded in something SPECIFIC - an \
+explicit Doors of Stone / unpublished-material reference, or content that \
+is plainly the prologue of the unpublished third book - never in a scene \
+merely "feeling" ominous, mysterious, or unresolved. If you cannot point \
+to that something specific, the chunk is not level 3 just because it is \
+tense or withholds an explanation; register LOW confidence instead of a \
+confident but ungrounded guess.
+
+Introduction vs. resolution: book_level judges DISCLOSURE, not narrative \
+significance. Introducing an unresolved mystery, strange object, or \
+ominous detail is establishing content at whatever book_level it first \
+appears - it does NOT itself imply a later book, even when the mystery's \
+eventual resolution lies further along or unpublished. A sealed chest \
+first described, an attack whose culprit is unknown, a creature nobody \
+has named yet: these are book-of-introduction content, however dramatic \
+or dangerous they read. Escalate ONLY when a chunk actually RESOLVES, \
+EXPLAINS, or EXTENDS a previously-established mystery with genuinely NEW \
+information beyond its book of introduction - never merely because the \
+content is dramatic, dangerous, or thematically important. A tense scene \
+is not evidence of a later book; a scene that answers a question raised \
+earlier is.
+
+Entity-introduction floor: for ANY chunk - lede, description, infobox, \
+trivia, real-world-references, or any other section - first ask whether \
+the entity it is about (the person, place, or group) is something a \
+reader with only Book 1 could already know exists. If the entity is \
+first introduced in Book 2 or later (e.g. a companion first met when \
+Kvothe travels to Ademre), Book 2 is a FLOOR under every chunk about \
+that entity, regardless of chunk type or content genre - even when a \
+given chunk's content, taken alone, looks as mundane and static as any \
+Book-1-reachable entity's, and even when it is pure real-world trivia \
+(etymology, translations) with no in-story claim at all. The mandatory \
+page-title/section-heading prefix on every chunk discloses the entity's \
+existence by itself; the disclosure is the entity existing, not any one \
+field, sentence, or content genre.
+
+Infobox chunks (structured "key: value" lines): once an entity is \
+already Book-1-reachable (e.g. Severen - named in a Book-1 letter and \
+shown on the Book-1 map, well before Kvothe travels there), apply this \
+split: static facts (region, government type, currency, species) never \
+escalate book_level by themselves; relational facts (e.g. ruler, \
+affiliation, family) escalate ONLY if the pairing itself is a story \
+disclosure (something that happens in the plot), not if it is just \
+background civic or genealogical structure. Example: Severen's infobox \
+naming its ruler is background lore, not a disclosure, even though \
+Kvothe only visits Severen in a later book.
 
 Be conservative in the direction of protecting spoilers, but do not invent \
 implied information absent from the given text - the point is to find the \
@@ -163,6 +226,15 @@ def label_chunk(client, chunk: dict, model: str = MODEL) -> dict:
 
     result = response.output_parsed
     applied_level, overridden = apply_conservative_default(result)
+    usage = response.usage
+    cached_tokens = usage.input_tokens_details.cached_tokens if usage else 0
+    input_tokens = usage.input_tokens if usage else 0
+    output_tokens = usage.output_tokens if usage else 0
+    log.info(
+        "usage %s: input=%d cached=%d (%.0f%%) output=%d",
+        chunk["chunk_id"], input_tokens, cached_tokens,
+        100 * cached_tokens / input_tokens if input_tokens else 0.0, output_tokens,
+    )
     return {
         "chunk_id": chunk["chunk_id"],
         "book_level": applied_level,
@@ -171,6 +243,9 @@ def label_chunk(client, chunk: dict, model: str = MODEL) -> dict:
         "rationale": result.rationale,
         "overridden": overridden,
         "model": model,
+        "input_tokens": input_tokens,
+        "cached_tokens": cached_tokens,
+        "output_tokens": output_tokens,
     }
 
 
@@ -181,6 +256,28 @@ def label_chunks(client, chunks: list[dict], model: str = MODEL) -> list[dict]:
         if i % 20 == 0 or i == len(chunks):
             log.info("labeled %d/%d chunks", i, len(chunks))
     return records
+
+
+def actual_cost(records: list[dict]) -> dict:
+    """Real cost from observed usage (label_chunk's input/cached/output_tokens),
+    as opposed to estimate_cost's pre-call, no-caching approximation."""
+    input_tokens = sum(r["input_tokens"] for r in records)
+    cached_tokens = sum(r["cached_tokens"] for r in records)
+    output_tokens = sum(r["output_tokens"] for r in records)
+    uncached_tokens = input_tokens - cached_tokens
+    cost_usd = (
+        uncached_tokens / 1_000_000 * PRICE_PER_1M_INPUT
+        + cached_tokens / 1_000_000 * PRICE_PER_1M_CACHED_INPUT
+        + output_tokens / 1_000_000 * PRICE_PER_1M_OUTPUT
+    )
+    return {
+        "chunks": len(records),
+        "input_tokens": input_tokens,
+        "cached_tokens": cached_tokens,
+        "cache_hit_rate": cached_tokens / input_tokens if input_tokens else 0.0,
+        "output_tokens": output_tokens,
+        "cost_usd": round(cost_usd, 4),
+    }
 
 
 def estimate_cost(chunks: list[dict], model: str = MODEL) -> dict:
@@ -255,6 +352,8 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
+    from dotenv import load_dotenv
+    load_dotenv()
     from openai import OpenAI
 
     client = OpenAI()
@@ -267,6 +366,7 @@ def main(argv: list[str] | None = None) -> int:
         "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records),
         encoding="utf-8",
     )
+    cost = actual_cost(records)
     manifest = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "input": str(args.input),
@@ -275,11 +375,17 @@ def main(argv: list[str] | None = None) -> int:
         "overridden_count": sum(r["overridden"] for r in records),
         "duration_s": round(duration_s, 1),
         "tool_version": TOOL_VERSION,
+        "actual_cost": cost,
     }
     args.output.with_name(args.output.stem + "_manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
     log.info("wrote %d labeled chunks to %s (%.1fs)", len(records), args.output, duration_s)
+    print(
+        f"actual cost: ${cost['cost_usd']:.4f} ({cost['chunks']} chunks, "
+        f"cache hit rate {cost['cache_hit_rate']:.1%}, "
+        f"input={cost['input_tokens']:,} cached={cost['cached_tokens']:,} output={cost['output_tokens']:,})"
+    )
     return 0
 
 

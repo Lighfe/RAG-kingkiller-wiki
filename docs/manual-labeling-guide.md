@@ -37,7 +37,7 @@ separately, so an honest "u" beats a coin flip.
   nothing book-2 is revealed. Mention ≠ reveal — this is the trap the
   labeler exists to catch.
 
-## Infobox and reference-section edge cases (D18, D19)
+## Infobox and reference-section edge cases (D19, D20, D21, D26)
 
 - *(Severen-shape, invented)* An infobox reads `location: Vintas`,
   `position: City`, `currency: Vintish, Cealdish`, `ruler: Maer
@@ -49,6 +49,33 @@ separately, so an honest "u" beats a coin flip.
   entities *because of what happens between them* (e.g. a character's
   infobox listing a book-2-only ally gained through a book-2 event) —
   that pairing would escalate.
+  **This holds specifically because Severen is Book-1-reachable** —
+  it's on the TNOTW map and named in a book-1 letter before Kvothe
+  ever travels there. The "static fields don't escalate" reasoning
+  does not transfer to an entity a Book-1-only reader has never heard
+  of (D21, next example).
+- *(Adem-companion-shape, invented)* An infobox for "Tepa," a mercenary
+  first introduced when Kvothe travels to Ademre, reads `species:
+  human`, `occupation: mercenary`, `residence: Ademre`, `affiliation:
+  Kvothe's traveling company` — fields exactly as mundane and static
+  as Severen's. → **2**, still: nothing here is a plot disclosure, but
+  Tepa's entire *existence* is a Book-2 fact. A Book-1-only reader has
+  no way to encounter this page at all without learning that Kvothe's
+  story includes an Adem mercenary company — that's the disclosure,
+  not any individual field (D21). The static/relational split from
+  D18/D19 only ever applied to entities already knowable from Book 1;
+  for a Book-2-introduced entity, Book-2 is a floor under every one of
+  its chunks, infobox included.
+- *(Tepa-trivia-shape, invented, D26)* A `Trivia` section on the same
+  "Tepa" page (D26 next example): *"The name Tepa may derive from an
+  old Cormerant word meaning 'quick.'"* → **2**, still — same floor as
+  above, and it doesn't matter that this chunk isn't even an infobox.
+  It's pure real-world etymology with zero in-story content, the kind
+  of chunk that's easy to wave through as "obviously book-1-safe." But
+  a Book-1-only reader can't reach this page at all without already
+  knowing Tepa exists, and that's a Book-2 fact regardless of the
+  chunk's content genre (D21/D26: the floor is chunk-type-agnostic —
+  it's not just an infobox thing).
 - *(Four-plate-door-shape, invented)* A page's `References` section
   (no `{{ref}}` template, no citation) is just the plain-text lines
   *"The Name of the Wind"* / *"The Wise Man's Fear"*. → **1**: these

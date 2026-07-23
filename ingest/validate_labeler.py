@@ -15,7 +15,9 @@ import argparse
 import json
 import logging
 import math
+import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 from ingest.draw_sample import verify_frozen
@@ -24,6 +26,32 @@ from ingest.label_llm import label_chunks
 log = logging.getLogger(__name__)
 
 Z_95 = 1.96
+
+# D24: category-defined exclusions from the gold accuracy denominator - gold
+# chunks that cannot carry content-level book signal by construction, so
+# scoring the labeler's judgment against them isn't a real test of it.
+# Empirically verified 2026-07-22 against every instance in chunks.jsonl:
+#   - infobox (24 chunks, all ns-112): pure structural bibliographic
+#     key-value fields (book/chapter/arc/location/previous/next/name), no
+#     narrative content, plus the raw |book= code leaks verbatim (D07).
+#   - "The first/second/third silence" sub-headings (15 chunks): a
+#     recurring sensory-list literary device across the 5 "Silence of
+#     Three Parts" bookend chapters, purely atmospheric in every instance.
+# "Title" headings (18 chunks) were also checked and do NOT verify as a
+# category - most instances state a specific chapter-content claim (e.g.
+# "Ben is Distracted by an attractive widow that leads to his Farewell.",
+# "Kote goes out to hunt the Scrael leaving Bast a Note...") - so "Title"
+# is deliberately NOT excluded here despite being in D24's draft starting
+# list. Flagged for manual review rather than auto-excluded, per instructions.
+SILENCE_HEADING_RE = re.compile(r"(first|second|third)\s+silence", re.IGNORECASE)
+
+
+def d24_exclusion_category(chunk: dict) -> str | None:
+    if chunk["chunk_type"] == "infobox":
+        return "infobox"
+    if SILENCE_HEADING_RE.search(chunk["section_heading"] or ""):
+        return "silence-heading"
+    return None
 
 
 def load_chunks(path: Path) -> list[dict]:
@@ -117,21 +145,24 @@ def run_gold_validation(client, chunks: list[dict]) -> dict:
             "chunk_type": chunk_by_id[cid]["chunk_type"],
             "actual": chunk_by_id[cid]["book_level"],
             "predicted": labeled_by_id[cid]["book_level"],
+            "confidence": labeled_by_id[cid]["confidence"],
             "rationale": labeled_by_id[cid]["rationale"],
         }
         for cid in labeled_by_id
     ]
     pairs = [(r["actual"], r["predicted"]) for r in records]
-    # Infobox gold chunks carry the raw |book= code verbatim in the
-    # harvested "book: TNOTW" param (D07) - the LLM can read it off
-    # directly, so accuracy on that subset is not a real test of judgment.
-    non_infobox_pairs = [(r["actual"], r["predicted"]) for r in records if r["chunk_type"] != "infobox"]
+
+    exclusion_by_id = {cid: d24_exclusion_category(chunk_by_id[cid]) for cid in labeled_by_id}
+    refined_pairs = [(r["actual"], r["predicted"]) for r in records if exclusion_by_id[r["chunk_id"]] is None]
+    excluded_breakdown = Counter(cat for cat in exclusion_by_id.values() if cat is not None)
 
     return {
         "records": records,
         "n": len(records),
         "accuracy_all": accuracy(pairs),
-        "accuracy_non_infobox": accuracy(non_infobox_pairs),
+        "accuracy_refined": accuracy(refined_pairs),
+        "excluded_count": sum(excluded_breakdown.values()),
+        "excluded_breakdown": dict(excluded_breakdown),
         "confusion_matrix": confusion_matrix(pairs),
         "disagreements": disagreements(records),
     }
@@ -150,6 +181,7 @@ def run_adversarial_validation(client, chunks_by_id: dict[str, dict], sample: li
             "chunk_id": r["chunk_id"],
             "actual": manual[r["chunk_id"]]["manual_book_level"],
             "predicted": labeled_by_id[r["chunk_id"]]["book_level"],
+            "confidence": labeled_by_id[r["chunk_id"]]["confidence"],
             "rationale": labeled_by_id[r["chunk_id"]]["rationale"],
         }
         for r in usable_sample
@@ -174,14 +206,15 @@ D13_ACCURACY_THRESHOLD = 0.90
 def print_report(gold_report: dict, adv_report: dict) -> bool:
     print("\n== Gold chapter set (blind re-derivation) ==")
     rate, correct, n = gold_report["accuracy_all"]
-    print(f"accuracy (all chunk types): {correct}/{n} = {rate:.3f}")
-    rate_ni, correct_ni, n_ni = gold_report["accuracy_non_infobox"]
-    print(
-        f"accuracy (prose+quote only, excludes infobox with verbatim |book= "
-        f"code leakage): {correct_ni}/{n_ni} = {rate_ni:.3f}"
-    )
     lo, hi = wilson_interval(correct, n)
-    print(f"95% CI (all chunks): [{lo:.3f}, {hi:.3f}]  (small n)")
+    print(f"accuracy, D13 original denominator (all {n} gold chunks): {correct}/{n} = {rate:.3f}  95% CI [{lo:.3f}, {hi:.3f}]")
+    rate_r, correct_r, n_r = gold_report["accuracy_refined"]
+    lo_r, hi_r = wilson_interval(correct_r, n_r)
+    print(
+        f"accuracy, D24 refined denominator (excludes {gold_report['excluded_count']} "
+        f"info-free-by-construction chunks: {gold_report['excluded_breakdown']}): "
+        f"{correct_r}/{n_r} = {rate_r:.3f}  95% CI [{lo_r:.3f}, {hi_r:.3f}]"
+    )
     print(format_confusion_matrix(gold_report["confusion_matrix"]))
     print(f"disagreements: {len(gold_report['disagreements'])}")
     for d in gold_report["disagreements"]:
@@ -200,19 +233,24 @@ def print_report(gold_report: dict, adv_report: dict) -> bool:
         print(f"  {d['chunk_id']}: manual={d['actual']} model={d['predicted']} - {d['rationale']}")
 
     recall_pass = adv_report["book2_recall"][0] >= D13_RECALL_THRESHOLD
-    accuracy_pass = gold_report["accuracy_all"][0] >= D13_ACCURACY_THRESHOLD
-    print("\n== D13 verdict ==")
+    accuracy_pass_original = gold_report["accuracy_all"][0] >= D13_ACCURACY_THRESHOLD
+    accuracy_pass_refined = gold_report["accuracy_refined"][0] >= D13_ACCURACY_THRESHOLD
+    print("\n== D13/D24 verdict ==")
     print(
         f"book-2 recall {adv_report['book2_recall'][0]:.3f} >= {D13_RECALL_THRESHOLD}: "
         f"{'PASS' if recall_pass else 'FAIL'}"
     )
     print(
-        f"gold accuracy {gold_report['accuracy_all'][0]:.3f} >= {D13_ACCURACY_THRESHOLD}: "
-        f"{'PASS' if accuracy_pass else 'FAIL'}"
+        f"gold accuracy (D13 original) {gold_report['accuracy_all'][0]:.3f} >= {D13_ACCURACY_THRESHOLD}: "
+        f"{'PASS' if accuracy_pass_original else 'FAIL'}"
+    )
+    print(
+        f"gold accuracy (D24 refined, operative gate) {gold_report['accuracy_refined'][0]:.3f} "
+        f">= {D13_ACCURACY_THRESHOLD}: {'PASS' if accuracy_pass_refined else 'FAIL'}"
     )
     print(f"note: small-n sample (gold n={gold_report['n']}, adversarial book-2 n={total}) - CIs are wide.")
-    overall = recall_pass and accuracy_pass
-    print(f"OVERALL: {'PASS' if overall else 'FAIL'} - {'full pass authorized to proceed' if overall else 'full pass NOT authorized'}")
+    overall = recall_pass and accuracy_pass_refined
+    print(f"OVERALL (using D24-refined gold accuracy): {'PASS' if overall else 'FAIL'} - {'full pass authorized to proceed' if overall else 'full pass NOT authorized'}")
     return overall
 
 
