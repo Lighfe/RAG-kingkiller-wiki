@@ -12,3 +12,6 @@ data/
 .venv/
 
 .env
+
+# linkedin notes
+docs/linkedin.md
