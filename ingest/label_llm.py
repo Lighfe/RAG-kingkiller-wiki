@@ -171,6 +171,13 @@ def prompt_hash() -> str:
     return hashlib.sha256(INSTRUCTIONS.encode("utf-8")).hexdigest()[:12]
 
 
+def content_hash(data: bytes) -> str:
+    """Full sha256 hex digest of an artifact's bytes (D29) - lets a
+    downstream stage (e.g. embedding/indexing) hash-gate its input, the
+    same way verify_frozen guards this stage's own input chunk set."""
+    return hashlib.sha256(data).hexdigest()
+
+
 def chunk_content(text: str) -> str:
     """Strip the 'page title [§ heading]\\n\\n' header line chunk_pages.py
     prepends to every chunk's text, leaving only the body content."""
@@ -435,16 +442,15 @@ def main(argv: list[str] | None = None) -> int:
         ids = [c["chunk_id"] for c in assembled]
         assert len(ids) == len(set(ids)), "chunk_id collision in assembled output"
 
-        args.output.write_text(
-            "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in assembled),
-            encoding="utf-8",
-        )
+        output_text = "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in assembled)
+        args.output.write_text(output_text, encoding="utf-8")
         manifest = {
             "generated_at": generated_at,
             "input": str(args.input),
             "model": MODEL,
             "prompt_version": PROMPT_VERSION,
             "prompt_hash": prompt_hash(),
+            "content_hash": content_hash(output_text.encode("utf-8")),
             "chunks_total": len(assembled),
             "chunks_labeled_this_run": len(records),
             "overridden_count": sum(r["overridden"] for r in records),

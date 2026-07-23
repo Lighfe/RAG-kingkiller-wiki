@@ -8,8 +8,9 @@ docs/kingkiller-dataset-notes.md.
 
 Inferred split (content-based, contiguous by D-number): D01–D16
 pipeline (ingestion/chunking mechanics + initial labeler setup),
-D17 evaluation (the eval-hierarchy decision), D18–D28 labeling (the
-LLM labeler's iterative prompt/schema development). Flag if these
+D17 evaluation (the eval-hierarchy decision), D18–D29 labeling (the
+LLM labeler's iterative prompt/schema development plus the full pass
+it authorized). Flag if these
 boundaries should fall elsewhere — it's a pure move, trivial to redo.
 
 | # | Topic | File |
@@ -42,3 +43,4 @@ boundaries should fall elsewhere — it's a pure move, trivial to redo.
 | D26 | Entity-introduction floor is chunk-type-agnostic | [labeling](labeling.md) |
 | D27 | Manual ground-truth corrections to manual_labels.jsonl | [labeling](labeling.md) |
 | D28 | Labeler schema: rationale generated before book_level/confidence | [labeling](labeling.md) |
+| D29 | Full LLM labeling pass executed: $1.6811 actual, chunks_labeled.jsonl frozen | [labeling](labeling.md) |

@@ -4,6 +4,7 @@
   "model": "gpt-5.4-mini",
   "prompt_version": "D28",
   "prompt_hash": "f4620456313e",
+  "content_hash": "020545bda388061a6bfe7fe37407d00be3e2eeba96fc5222c6b5117e946a5800",
   "chunks_total": 1761,
   "chunks_labeled_this_run": 1258,
   "overridden_count": 7,

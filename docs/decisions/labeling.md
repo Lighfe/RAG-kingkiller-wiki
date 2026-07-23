@@ -122,3 +122,12 @@ books" while the emitted `book_level` was 2 with `confidence: high` —
 a direct self-contradiction between the model's own stated reasoning
 and its label, consistent with the field-order theory rather than a
 one-off content misjudgment.
+
+**D29 · 2026-07-23 · Full LLM labeling pass executed.** 1,258 null-
+provenance chunks labeled at $1.6811 actual cost (vs. $1.66 estimate,
+~1.3% delta; 0% cache hit rate, consistent with the earlier
+calibration finding). 7 low-confidence chunks conservative-defaulted
+to book_level=3 per D12. Final corpus: data/chunks_labeled.jsonl,
+1,761 chunks (123 gold, 380 citation, 1,258 LLM) — frozen as the input
+to indexing. Manifest: data/chunks_labeled_manifest.json (model=
+gpt-5.4-mini, prompt_version=D28, prompt_hash=f4620456313e).

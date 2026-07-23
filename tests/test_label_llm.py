@@ -13,6 +13,7 @@ from ingest.label_llm import (
     build_user_message,
     chunk_content,
     confidence_distribution,
+    content_hash,
     estimate_cost,
     label_chunk,
     label_provenance_breakdown,
@@ -382,3 +383,12 @@ def test_prompt_hash_is_stable_and_short():
     h2 = prompt_hash()
     assert h1 == h2
     assert len(h1) == 12
+
+
+def test_content_hash_is_deterministic_and_sensitive_to_content():
+    a = content_hash(b"hello")
+    b = content_hash(b"hello")
+    c = content_hash(b"goodbye")
+    assert a == b
+    assert a != c
+    assert len(a) == 64  # full sha256 hex digest
