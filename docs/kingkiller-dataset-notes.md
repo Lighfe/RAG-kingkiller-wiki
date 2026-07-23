@@ -159,8 +159,14 @@ Rejected approaches, kept for the writeup:
 - ~~Chunking strategy~~ **Resolved: section-aware, D02–D10 (task 3).**
 - Embedding model (OpenAI vs sentence-transformers) — decide with the
   retrieval eval, not before it.
-- The evaluation question set for retrieval + end-to-end QA (separate
-  from the spoiler-leakage set).
+- ~~The evaluation question set for retrieval + end-to-end QA (separate
+  from the spoiler-leakage set)~~ **Resolved: eval design settled,
+  D30–D35 (evaluation.md).** Single-hop retrieval: graded ground truth
+  (exact chunk > same-page sibling), scored NDCG@k + hit rate@k,
+  measured unfiltered. Multi-hop/synthesis: LLM judge on claim
+  traceability, no fixed ground truth. Spoiler leakage: trap questions
+  (own book-2+ chunks + independent Wikipedia source) plus a control
+  pool, judged refuse-vs-answer, compared across prompt variants.
 - ~~Whether ns-2900 Map pages contain anything worth keeping~~
   **Resolved: out of scope by construction.** `fetch_pages.py` only
   enumerates namespaces 0 and 112 (D01); ns-2900 is never fetched, so

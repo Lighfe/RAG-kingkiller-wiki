@@ -6,12 +6,14 @@ entry per settled decision; date, decision, one-line why — full text
 lives in the linked file. Corpus/licensing/labeling-signal background:
 docs/kingkiller-dataset-notes.md.
 
-Inferred split (content-based, contiguous by D-number): D01–D16
-pipeline (ingestion/chunking mechanics + initial labeler setup),
-D17 evaluation (the eval-hierarchy decision), D18–D29 labeling (the
+Split (content-based, no longer contiguous by D-number after D30):
+D01–D16 pipeline (ingestion/chunking mechanics + initial labeler
+setup), D17 + D30–D35 evaluation (the eval-hierarchy decision, plus
+the eval-design pass: question generation, single-hop metrics,
+multi-hop judging, leakage-prompt comparison), D18–D29 labeling (the
 LLM labeler's iterative prompt/schema development plus the full pass
-it authorized). Flag if these
-boundaries should fall elsewhere — it's a pure move, trivial to redo.
+it authorized). Flag if these boundaries should fall elsewhere — it's
+a pure move, trivial to redo.
 
 | # | Topic | File |
 |---|---|---|
@@ -44,3 +46,9 @@ boundaries should fall elsewhere — it's a pure move, trivial to redo.
 | D27 | Manual ground-truth corrections to manual_labels.jsonl | [labeling](labeling.md) |
 | D28 | Labeler schema: rationale generated before book_level/confidence | [labeling](labeling.md) |
 | D29 | Full LLM labeling pass executed: $1.6811 actual, chunks_labeled.jsonl frozen | [labeling](labeling.md) |
+| D30 | Retrieval-config eval uses unfiltered ground truth; filter correctness verified separately | [evaluation](evaluation.md) |
+| D31 | Retrieval question-set generation: chunk-grounded, floor-stratified (not parity), excludes low-signal chunks | [evaluation](evaluation.md) |
+| D32 | refines D17 · Graded, scope-split ground truth for single-hop; no fixed ground truth for multi-hop | [evaluation](evaluation.md) |
+| D33 | operationalizes D17 · LLM-evaluation rubric point anchored on spoiler-refusal prompt comparison | [evaluation](evaluation.md) |
+| D34 | refines D17 · Spoiler leakage eval: trap + control pools, dual-sourced traps | [evaluation](evaluation.md) |
+| D35 | Production answers compose multiple chunks, possibly multiple pages | [evaluation](evaluation.md) |
