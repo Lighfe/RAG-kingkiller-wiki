@@ -15,6 +15,7 @@ gate that must pass before a full (--chunks omitted, no --dry-run) run.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import sys
@@ -29,6 +30,7 @@ from pydantic import BaseModel
 MODEL = "gpt-5.4-mini"
 CONSERVATIVE_DEFAULT_LEVEL = 3  # D12: uncertain -> highest (most restrictive) level
 TOOL_VERSION = "0.1"
+PROMPT_VERSION = "D28"  # docs/decisions/labeling.md - last revision folded into INSTRUCTIONS
 
 # Pricing sourced from https://developers.openai.com/api/docs/pricing on
 # 2026-07-22. gpt-5.4-mini has no tiktoken model mapping yet (checked against
@@ -162,6 +164,13 @@ not itself provide.
 rationale is one sentence explaining the book_level you chose."""
 
 
+def prompt_hash() -> str:
+    """Short sha256 of the current INSTRUCTIONS text. The prompt is
+    versioned in-repo (D12/PROMPT_VERSION); this hash ties a manifest to
+    the exact prompt text that produced it, independent of that tag."""
+    return hashlib.sha256(INSTRUCTIONS.encode("utf-8")).hexdigest()[:12]
+
+
 def chunk_content(text: str) -> str:
     """Strip the 'page title [§ heading]\\n\\n' header line chunk_pages.py
     prepends to every chunk's text, leaving only the body content."""
@@ -280,6 +289,52 @@ def actual_cost(records: list[dict]) -> dict:
     }
 
 
+def assemble_labeled_chunks(chunks: list[dict], records: list[dict]) -> list[dict]:
+    """D14's third pipeline artifact: every chunk from chunks.jsonl, with
+    gold/citation-tier chunks passed through unchanged and null-provenance
+    chunks filled in with this run's LLM labels - book_level_raw and
+    label_confidence alongside the (possibly conservative-default-overridden)
+    applied book_level, per D12's logging spec."""
+    records_by_id = {r["chunk_id"]: r for r in records}
+    null_ids = {c["chunk_id"] for c in chunks if c["label_provenance"] is None}
+    if records_by_id.keys() != null_ids:
+        missing = null_ids - records_by_id.keys()
+        extra = records_by_id.keys() - null_ids
+        raise ValueError(
+            f"records don't match null-provenance chunks: "
+            f"{len(missing)} missing, {len(extra)} unexpected"
+        )
+
+    assembled = []
+    for c in chunks:
+        if c["label_provenance"] is None:
+            r = records_by_id[c["chunk_id"]]
+            c = {
+                **c,
+                "book_level": r["book_level"],
+                "book_level_raw": r["book_level_raw"],
+                "label_confidence": r["confidence"],
+                "label_provenance": "llm",
+            }
+        assembled.append(c)
+    return assembled
+
+
+def label_provenance_breakdown(chunks: list[dict]) -> dict:
+    breakdown: dict[str, int] = {}
+    for c in chunks:
+        key = c["label_provenance"] or "null"
+        breakdown[key] = breakdown.get(key, 0) + 1
+    return breakdown
+
+
+def confidence_distribution(records: list[dict]) -> dict:
+    dist = {"low": 0, "medium": 0, "high": 0}
+    for r in records:
+        dist[r["confidence"]] += 1
+    return dist
+
+
 def estimate_cost(chunks: list[dict], model: str = MODEL) -> dict:
     """Token/cost estimate from local tokenisation - no API calls."""
     enc = tiktoken.get_encoding(TOKENIZER_ENCODING)
@@ -352,6 +407,11 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
+    full_run = args.chunks is None
+    if full_run:
+        from ingest.draw_sample import verify_frozen
+        verify_frozen(args.input)  # D14: labeling runs against the frozen chunk set
+
     from dotenv import load_dotenv
     load_dotenv()
     from openai import OpenAI
@@ -362,25 +422,59 @@ def main(argv: list[str] | None = None) -> int:
     duration_s = time.monotonic() - t0
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records),
-        encoding="utf-8",
-    )
     cost = actual_cost(records)
-    manifest = {
-        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "input": str(args.input),
-        "model": MODEL,
-        "chunks_labeled": len(records),
-        "overridden_count": sum(r["overridden"] for r in records),
-        "duration_s": round(duration_s, 1),
-        "tool_version": TOOL_VERSION,
-        "actual_cost": cost,
-    }
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    if full_run:
+        # D14's third pipeline artifact: the full chunk set, gold/citation
+        # rows unchanged, null-provenance rows filled in with this run's
+        # LLM labels.
+        assembled = assemble_labeled_chunks(chunks, records)
+        assert len(assembled) == len(chunks), "assembled row count must match chunks.jsonl"
+        assert all(c["book_level"] is not None for c in assembled), "every row must have a book_level"
+        ids = [c["chunk_id"] for c in assembled]
+        assert len(ids) == len(set(ids)), "chunk_id collision in assembled output"
+
+        args.output.write_text(
+            "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in assembled),
+            encoding="utf-8",
+        )
+        manifest = {
+            "generated_at": generated_at,
+            "input": str(args.input),
+            "model": MODEL,
+            "prompt_version": PROMPT_VERSION,
+            "prompt_hash": prompt_hash(),
+            "chunks_total": len(assembled),
+            "chunks_labeled_this_run": len(records),
+            "overridden_count": sum(r["overridden"] for r in records),
+            "label_provenance_breakdown": label_provenance_breakdown(assembled),
+            "confidence_distribution": confidence_distribution(records),
+            "duration_s": round(duration_s, 1),
+            "tool_version": TOOL_VERSION,
+            "actual_cost": cost,
+        }
+        log.info("wrote %d assembled chunks to %s (%.1fs)", len(assembled), args.output, duration_s)
+    else:
+        args.output.write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records),
+            encoding="utf-8",
+        )
+        manifest = {
+            "generated_at": generated_at,
+            "input": str(args.input),
+            "model": MODEL,
+            "chunks_labeled": len(records),
+            "overridden_count": sum(r["overridden"] for r in records),
+            "duration_s": round(duration_s, 1),
+            "tool_version": TOOL_VERSION,
+            "actual_cost": cost,
+        }
+        log.info("wrote %d labeled chunks to %s (%.1fs)", len(records), args.output, duration_s)
+
     args.output.with_name(args.output.stem + "_manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
-    log.info("wrote %d labeled chunks to %s (%.1fs)", len(records), args.output, duration_s)
     print(
         f"actual cost: ${cost['cost_usd']:.4f} ({cost['chunks']} chunks, "
         f"cache hit rate {cost['cache_hit_rate']:.1%}, "

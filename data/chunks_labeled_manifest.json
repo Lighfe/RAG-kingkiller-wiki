@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-07-23T09:43:24Z",
+  "input": "data/chunks.jsonl",
+  "model": "gpt-5.4-mini",
+  "prompt_version": "D28",
+  "prompt_hash": "f4620456313e",
+  "chunks_total": 1761,
+  "chunks_labeled_this_run": 1258,
+  "overridden_count": 7,
+  "label_provenance_breakdown": {
+    "llm": 1258,
+    "citation": 380,
+    "gold": 123
+  },
+  "confidence_distribution": {
+    "low": 7,
+    "medium": 50,
+    "high": 1201
+  },
+  "duration_s": 2069.0,
+  "tool_version": "0.1",
+  "actual_cost": {
+    "chunks": 1258,
+    "input_tokens": 1793735,
+    "cached_tokens": 0,
+    "cache_hit_rate": 0.0,
+    "output_tokens": 74611,
+    "cost_usd": 1.6811
+  }
+}

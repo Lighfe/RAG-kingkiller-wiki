@@ -9,11 +9,15 @@ from ingest.label_llm import (
     LabelResult,
     actual_cost,
     apply_conservative_default,
+    assemble_labeled_chunks,
     build_user_message,
     chunk_content,
+    confidence_distribution,
     estimate_cost,
     label_chunk,
+    label_provenance_breakdown,
     null_provenance_frame,
+    prompt_hash,
 )
 
 CHUNK = {
@@ -289,3 +293,92 @@ def test_null_provenance_frame_filters_out_labeled_chunks():
     ]
     frame = null_provenance_frame(chunks)
     assert [c["chunk_id"] for c in frame] == ["a", "d"]
+
+
+# -- assembling the D14 third-stage artifact ----------------------------------
+
+
+def _record(chunk_id, book_level=1, book_level_raw=1, confidence="high", overridden=False):
+    return {
+        "chunk_id": chunk_id,
+        "book_level": book_level,
+        "book_level_raw": book_level_raw,
+        "confidence": confidence,
+        "rationale": "x",
+        "overridden": overridden,
+        "model": "gpt-5.4-mini",
+        "input_tokens": 100,
+        "cached_tokens": 0,
+        "output_tokens": 20,
+    }
+
+
+def test_assemble_labeled_chunks_leaves_gold_and_citation_untouched():
+    chunks = [
+        {"chunk_id": "a", "label_provenance": "gold", "book_level": 2},
+        {"chunk_id": "b", "label_provenance": "citation", "book_level": 3},
+    ]
+    assembled = assemble_labeled_chunks(chunks, [])
+    assert assembled == chunks
+
+
+def test_assemble_labeled_chunks_fills_in_null_provenance_rows():
+    chunks = [
+        {"chunk_id": "a", "label_provenance": "gold", "book_level": 2},
+        {"chunk_id": "n", "label_provenance": None, "book_level": None, "text": "t"},
+    ]
+    records = [_record("n", book_level=3, book_level_raw=1, confidence="low")]
+    assembled = assemble_labeled_chunks(chunks, records)
+
+    gold, null_row = assembled
+    assert gold == chunks[0]
+    assert null_row["book_level"] == 3
+    assert null_row["book_level_raw"] == 1
+    assert null_row["label_confidence"] == "low"
+    assert null_row["label_provenance"] == "llm"
+    assert null_row["text"] == "t"  # other chunk fields preserved
+
+
+def test_assemble_labeled_chunks_preserves_input_order_and_count():
+    chunks = [
+        {"chunk_id": "a", "label_provenance": None},
+        {"chunk_id": "b", "label_provenance": "gold"},
+        {"chunk_id": "c", "label_provenance": None},
+    ]
+    records = [_record("a"), _record("c")]
+    assembled = assemble_labeled_chunks(chunks, records)
+    assert [c["chunk_id"] for c in assembled] == ["a", "b", "c"]
+    assert len(assembled) == len(chunks)
+
+
+def test_assemble_labeled_chunks_rejects_mismatched_records():
+    chunks = [{"chunk_id": "a", "label_provenance": None}]
+    with pytest.raises(ValueError):
+        assemble_labeled_chunks(chunks, [_record("wrong-id")])
+    with pytest.raises(ValueError):
+        assemble_labeled_chunks(chunks, [])
+
+
+# -- manifest aggregates --------------------------------------------------
+
+
+def test_label_provenance_breakdown_counts_each_tier():
+    chunks = [
+        {"label_provenance": "gold"},
+        {"label_provenance": "gold"},
+        {"label_provenance": "citation"},
+        {"label_provenance": "llm"},
+    ]
+    assert label_provenance_breakdown(chunks) == {"gold": 2, "citation": 1, "llm": 1}
+
+
+def test_confidence_distribution_counts_all_three_levels_even_if_zero():
+    records = [_record("a", confidence="low"), _record("b", confidence="low"), _record("c", confidence="high")]
+    assert confidence_distribution(records) == {"low": 2, "medium": 0, "high": 1}
+
+
+def test_prompt_hash_is_stable_and_short():
+    h1 = prompt_hash()
+    h2 = prompt_hash()
+    assert h1 == h2
+    assert len(h1) == 12
