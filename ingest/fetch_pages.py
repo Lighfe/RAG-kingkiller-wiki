@@ -185,6 +185,41 @@ class WikiFetcher:
             )
         return records
 
+    def fetch_redirects(self, titles: list[str]) -> dict[str, str]:
+        """Resolve titles to their final redirect target, if any (task 6b).
+
+        One query per batch of <=50 titles (``redirects=1``), reusing this
+        fetcher's throttle/retry/session — no new polling pattern. Threads
+        each *original* title through the API's own case/underscore
+        normalization and any redirect chain, but only records an entry
+        when a real ``redirects`` hop actually fired — a title that was
+        merely re-cased (``normalized``) without ever being a redirect is
+        left out, same as one that's missing entirely. Callers must not
+        assume every input title comes back resolved.
+        """
+        resolved: dict[str, str] = {}
+        batches = [titles[i : i + BATCH_SIZE] for i in range(0, len(titles), BATCH_SIZE)]
+        for i, batch in enumerate(batches, start=1):
+            payload = self._get(
+                {"action": "query", "titles": "|".join(batch), "redirects": 1}
+            )
+            query = payload.get("query", {})
+            normalized = {e["from"]: e["to"] for e in query.get("normalized", [])}
+            redirects = {e["from"]: e["to"] for e in query.get("redirects", [])}
+            for title in batch:
+                current = normalized.get(title, title)
+                followed = False
+                for _ in range(5):  # bound pathological redirect chains
+                    nxt = redirects.get(current)
+                    if nxt is None:
+                        break
+                    current = nxt
+                    followed = True
+                if followed:
+                    resolved[title] = current
+            log.info("redirect batch %d/%d done (%d titles queried)", i, len(batches), len(batch))
+        return resolved
+
     def fetch_all(
         self,
         namespaces: tuple[int, ...] = CONTENT_NAMESPACES,

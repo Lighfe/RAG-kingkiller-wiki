@@ -173,6 +173,63 @@ def test_accepts_the_kingkiller_fandom_host():
     assert fetcher.api_url == API_URL
 
 
+@responses.activate
+def test_fetch_redirects_follows_normalization_and_redirect_chain():
+    # "span" -> normalized to "Span" -> redirects to "Calendar of Temerant";
+    # mirrors the real API shape observed for this corpus (task 6b).
+    responses.get(
+        API_URL,
+        json={
+            "query": {
+                "normalized": [{"from": "span", "to": "Span"}],
+                "redirects": [
+                    {"from": "University", "to": "The University"},
+                    {"from": "Span", "to": "Calendar of Temerant"},
+                ],
+                "pages": [
+                    {"pageid": 1, "ns": 0, "title": "The University"},
+                    {"pageid": 2, "ns": 0, "title": "Calendar of Temerant"},
+                    {"ns": 0, "title": "Nonexistentxyz123", "missing": True},
+                ],
+            }
+        },
+    )
+
+    result = make_fetcher().fetch_redirects(["University", "span", "Nonexistentxyz123"])
+
+    assert result == {"University": "The University", "span": "Calendar of Temerant"}
+
+
+@responses.activate
+def test_fetch_redirects_ignores_normalization_only_titles():
+    # A title that only gets re-cased, with no actual redirects entry,
+    # must NOT be reported as resolved (D36 amendment: redirects-only).
+    responses.get(
+        API_URL,
+        json={
+            "query": {
+                "normalized": [{"from": "kvothe", "to": "Kvothe"}],
+                "pages": [{"pageid": 1, "ns": 0, "title": "Kvothe"}],
+            }
+        },
+    )
+    result = make_fetcher().fetch_redirects(["kvothe"])
+    assert result == {}
+
+
+@responses.activate
+def test_fetch_redirects_batches_at_50():
+    def callback(request):
+        titles = parse_qs(urlparse(request.url).query)["titles"][0].split("|")
+        return 200, {}, json.dumps({"query": {"redirects": [], "pages": []}})
+
+    responses.add_callback(responses.GET, API_URL, callback=callback)
+    make_fetcher().fetch_redirects([f"T{i}" for i in range(120)])
+
+    batch_sizes = [len(query_params(c)["titles"].split("|")) for c in responses.calls]
+    assert batch_sizes == [50, 50, 20]
+
+
 @pytest.mark.network
 def test_live_api_small_batch():
     fetcher = WikiFetcher()

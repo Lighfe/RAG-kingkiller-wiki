@@ -87,3 +87,34 @@ they emit no chunk.** Logged as detections, not silently dropped.
 1,109w) stay unsplit; paragraph is the smallest split unit.** Worst
 cases are lists; arbitrary sub-paragraph cuts help nothing. Revisit at
 retrieval eval if these chunks misbehave.
+
+**D37 · 2026-07-23 · refines D03 · Known, un-fixed gap: mwparserfromhell
+0.7.2's strip_code() concatenates wikitext-table cell text with ZERO
+separator on well-formed, CLOSED `{|...|}` tables — logged, not patched,
+since chunks_labeled.jsonl is frozen (D29).** Discovered investigating
+task 6c's rollup validation (entity_links.jsonl had 122 fewer page-pairs
+than Stage A's page-level link graph — see task 6/6b). Root-caused by
+direct bisection against the real wikitext: "The Name of the Wind Playing
+Cards" (pageid 8290) has a card-listing table whose cells (`Kilvin`,
+`Arliden`, `Queen`, `Denna`, `Fela`, ...) render into chunk text as one
+unbroken run — `"...KilvinArlidenQueen DennaFelaDeviLaurianJackBast..."`
+— breaking `\b`-anchored word-boundary matching even though the words are
+genuinely present as a substring. An UNCLOSED table does not trigger this
+(confirmed by removing the closing `|}` from the reproduction); the
+closing tag is what flips mwph's tokenizer into whatever internal mode
+drops the inter-cell whitespace. This is a distinct failure mode from
+D03's original strip_code() warning (link-target loss) — same root
+cause class (trusting strip_code() to preserve structure it doesn't
+understand), different symptom (table cells, not links). Of the 122
+missing pairs: ~34 are pages the chunker drops entirely
+(MIN_PAGE_WORDS), ~39 show this exact table-concatenation signature, the
+remainder is other content lost during infobox/residue-cleanup harvesting
+(verified absent as even a plain substring in chunk text, not just a
+word-boundary miss). Reconciliation check: manifest's per-bucket
+category_crosstab == task 6c's rolled-up crosstab + the missing-pairs'
+own crosstab, exactly, for every bucket — confirms this is fully and
+only this gap, not a defect in task 6c's own logic. Not fixed here: a
+fix means re-chunking (touching the D29-frozen corpus, invalidating the
+labeling pass built on top of it) — out of scope for a read-only rollup
+task. Revisit if retrieval eval surfaces these specific chunks (few dozen
+pages with wikitext tables) misbehaving, same posture as D16.
