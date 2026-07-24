@@ -8,10 +8,12 @@ docs/kingkiller-dataset-notes.md.
 
 Split (content-based, no longer contiguous by D-number after D30):
 D01–D16 + D37 pipeline (ingestion/chunking mechanics + initial labeler
-setup), D17 + D30–D36 + D38–D39 evaluation (the eval-hierarchy decision,
+setup), D17 + D30–D36 + D38–D41 evaluation (the eval-hierarchy decision,
 plus the eval-design pass: question generation, single-hop metrics,
 multi-hop judging, leakage-prompt comparison, the entity co-mention
-graph, its retirement, and the one-shot-vs-agentic-loop redesign),
+graph, its retirement, the one-shot-vs-agentic-loop redesign, the
+single-hop grading-scheme revision for the embedding bake-off, and the
+question-generation defect fixes found on human review),
 D18–D29 labeling (the LLM labeler's iterative prompt/schema development
 plus the full pass it authorized). Flag if these boundaries should fall
 elsewhere — it's a pure move, trivial to redo.
@@ -49,7 +51,7 @@ elsewhere — it's a pure move, trivial to redo.
 | D29 | Full LLM labeling pass executed: $1.6811 actual, chunks_labeled.jsonl frozen | [labeling](labeling.md) |
 | D30 | Retrieval-config eval uses unfiltered ground truth; filter correctness verified separately | [evaluation](evaluation.md) |
 | D31 | Retrieval question-set generation: chunk-grounded, floor-stratified (not parity), excludes low-signal chunks | [evaluation](evaluation.md) |
-| D32 | refines D17 · Graded, scope-split ground truth for single-hop; no fixed ground truth for multi-hop — refined in D38 | [evaluation](evaluation.md) |
+| D32 | refines D17 · Graded, scope-split ground truth for single-hop; no fixed ground truth for multi-hop — refined in D38, D40 | [evaluation](evaluation.md) |
 | D33 | operationalizes D17 · LLM-evaluation rubric point anchored on spoiler-refusal prompt comparison | [evaluation](evaluation.md) |
 | D34 | refines D17 · Spoiler leakage eval: trap + control pools, dual-sourced traps | [evaluation](evaluation.md) |
 | D35 | Production answers compose multiple chunks, possibly multiple pages | [evaluation](evaluation.md) |
@@ -57,3 +59,5 @@ elsewhere — it's a pure move, trivial to redo.
 | D37 | refines D03 · Known, un-fixed gap: strip_code() concatenates closed-table cell text with no separator; found via task 6c | [pipeline](pipeline.md) |
 | D38 | refines D32 · Entity-graph-driven multi-hop question sourcing retired; "hop" terminology disambiguated | [evaluation](evaluation.md) |
 | D39 | One-shot vs. agentic-loop retrieval comparison design | [evaluation](evaluation.md) |
+| D40 | refines D32 · Single-hop bake-off ground truth is binary (exact chunk_id), not graded — NDCG dropped for hit rate@k + MRR | [evaluation](evaluation.md) |
+| D41 | Task 8's question set had 3 real generation defects (metatextual leakage, compound/quiz-style, pool-exclusion gap) — fixed, regenerated, task 8 outputs superseded | [evaluation](evaluation.md) |

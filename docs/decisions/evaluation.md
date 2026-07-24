@@ -210,3 +210,113 @@ a "main character trap" where the loop defaults to the
 most-connected/most-mentioned entities regardless of relevance, the same
 failure mode D38's annotation review surfaced in the abandoned
 hand-picking approach.
+
+**D40 · 2026-07-24 · refines D32 · Single-hop ground truth for the
+embedding-model bake-off is binary (exact chunk_id only), not D32's
+graded same-page-sibling scheme; NDCG dropped in favor of hit rate@k +
+MRR.** Considered graded scoring (exact=2, same-page sibling=1 via a
+lexical/keyword-overlap "pertinent check," chunk_type=prose-only
+eligibility, boost weights on `page_title`/`chunk_type` held constant
+across compared configs) — motivated by wanting compatibility with later
+field-boost tuning without same-page credit mechanically favoring a
+page_title-boosted config. Dropped in favor of binary: binary grading is
+structurally immune to that confound by construction (the target chunk
+is itself on the titled page, so page_title-driven signal toward it is
+legitimate, not exploited) — no mitigation layer needed. Also more
+reliable at this project's deliberately low/toy question volume (task 8:
+148 questions), where a heuristic's false positives (the same short-name-
+collision risk D36's entity-graph spot check flagged, e.g. "Ben") aren't
+averaged out. Consequence: NDCG isn't used this round — it needs graded
+labels to earn its cost — so hit rate@k and MRR are the metrics,
+reverting to D17's originally named pair for Stage 1. Graded same-page
+scoring is a documented, deferred upgrade path, not deleted: revisit if
+and when the eval needs finer resolution than binary gives (e.g. once
+field-boost tuning is actually in scope, Stage 2+).
+
+**D41 · 2026-07-24 · Human review of task 8's 148-question set found
+three real question-generation defects (not sampling noise); task 8's
+questions.jsonl and embedding_baking_off_results are void, fixed and
+regenerated under task 8a.** Cites the actual review findings, not a
+paraphrase:
+
+1. **Wiki-metatextual leakage** — questions referencing the source's own
+   document structure rather than the world/story, e.g. "Who is listed
+   as Meluan Lackless's husband in the infobox?" (2291:infobox-0:0), "How
+   many pages is The Slow Regard of Silent Things listed as having in its
+   infobox?" (5281:infobox-0:0), and "Which characters are listed in the
+   chapter's characters list?" (12385:characters-list:0). Fix: an
+   explicit negative constraint in the generation prompt (`ingest/
+   generate_questions.py` `INSTRUCTIONS`), enforced by an automated
+   post-generation gate (`has_banned_reference`) that regenerates any hit
+   rather than hand-editing around it — bare terms "infobox"/"listed"/
+   "stated"/"section", plus the phrase "according to the
+   wiki/page/article/chapter/entry/infobox/section/speculation/text/
+   list". In-world attribution by name (e.g. "According to Kvothe...",
+   "According to the Cthaeh...") is explicitly exempted — the ban targets
+   referencing the document, not the story's own voices.
+2. **Speculation-sourced questions initially misdiagnosed** — first
+   proposed excluding `is_speculation=true` chunks from the source pool
+   entirely; WRONG, corrected on review. The actual bug is case 1's same
+   leakage pattern surfacing on a "Speculation"-headed chunk: "According
+   to the speculation, which person is suggested as a possible Amyr
+   member because he guards the door?" (2045:speculation:0) — the
+   heading's own literal name leaking into the question, not that
+   speculative content is inherently unaskable. Fix is generation-level
+   (case 1's constraint + phrase list explicitly covering "the
+   speculation"), not pool-exclusion — the pool keeps every
+   `is_speculation` chunk. This mattered because book_level=3 is already
+   the smallest, most concentrated pool (32 chunks pre-exclusion, D23);
+   excluding speculation-flagged material would have gutted it further.
+   Regenerated speculation questions now read naturally: "Who do fans
+   think Kvothe may already have met under a different alias as Master
+   Ash?", "What clue makes fans think Auri might be connected to the
+   Amyr?" — topical vocabulary ("theory", "speculation", "fans think"),
+   not document-structure reference.
+3. **Compound/quiz-style questions** — joining two distinct asks with
+   "and" instead of one focused question, e.g. "What was the object
+   Mauthen had found buried under the house, and why was Nina afraid the
+   Chandrian might come after her?" (2099:in-the-chronicle:0). Measured
+   at 41/148 (28%) of task 8's set via a `", and (what|how|why|which|
+   who|where|when)"` grep — a real, systemic rate, not noise. Not fixed
+   via a syntactic "and"-ban (too narrow, mistargets the actual problem:
+   a listing-style compound like the Tak external-links question below
+   has no "and… what" join at all). Fix is a persona/intent instruction:
+   write as a curious reader asking one thing they genuinely want to
+   know, not an exhaustive-recall quiz question covering multiple stated
+   facts. Reduced task 8a's regenerated set to 6/148 (4%) on the same
+   grep — better, not eliminated; compound/quiz-style-ness isn't reliably
+   greppable (a listing style can dodge any fixed conjunction pattern),
+   so residual cases are a human-review finding, not an automated-gate
+   failure.
+4. **Pool-exclusion gap, found while investigating case 1**: bare
+   navigational/index sections carry no checkable content, the same
+   category D24 already named and flagged for revisiting ("Title",
+   "Silence" headings) if more turned up — this is that revisit.
+   `12385:characters-list:0` (a bare name list on a ns=112 chapter page)
+   produced case 1's characters-list example. Auditing every
+   `section_heading` leaf corpus-wide for the pattern's recurrence (not
+   patching just the one instance) found it recurs twice more: "external
+   links" (4 chunks — bare link/website-name lists, e.g. "DAW Books
+   Website"; one of these, `3770:external-links:0`, produced task 8's
+   compound "which official Tak resources include..." listing question)
+   and "list of appearances" (1 chunk, Elodin — a bare chapter+page
+   index). Checked and NOT excluded, same "verify before excluding"
+   discipline as D24's "Title" precedent: "see also" (2 chunks, each
+   carrying a real one-line relationship claim, e.g. "Tak - A modern game
+   that arose from Kaen") and "appearances in the books" (1 chunk,
+   Gerrek — real descriptive content); several other "list"-named
+   headings (List of languages, List of songs, List of editions by
+   country, Siaru's grammar "Lists" section) were also checked and kept
+   for the same reason — heading text alone doesn't determine exclusion,
+   content does.
+
+**Consequence**: eligible pool for question-sourcing moved from
+1,719/1,761 (task 8) to 1,696/1,761 (task 8a, 23 more excluded) —
+confirmed near-unchanged rather than assumed; the D31 60/60/28
+book_level floors were unaffected (none of the newly-excluded chunks are
+book_level=3). The question set was regenerated at the same target
+volume (148) and the embedding bake-off (D40) was rerun against it —
+task 8's original questions.jsonl and embedding_baking_off_results are
+superseded, not silently overwritten (both manifests say so explicitly).
+No change to the embedding candidates or hit-rate@k/MRR metric choice —
+orthogonal to what this entry fixes.
